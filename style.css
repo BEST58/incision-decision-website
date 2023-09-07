@@ -59,6 +59,7 @@ nav a {
 header {
     display: flex;
     padding: 2rem;
+    padding-bottom: 12rem;
     justify-content: center;
     align-items: center;
     flex-direction: row;
