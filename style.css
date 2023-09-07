@@ -85,3 +85,6 @@ header img {
     width: 75%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+section {
+    text-align: center;
+}
