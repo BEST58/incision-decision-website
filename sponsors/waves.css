@@ -1,4 +1,4 @@
-main .air {
+header .air {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -9,7 +9,7 @@ main .air {
 }
 
 
-main .air.air1 {
+header .air.air1 {
   z-index: 1000;
   opacity: 1;
   animation-delay: 0s;
@@ -17,7 +17,7 @@ main .air.air1 {
   background-position-x: 500px;
 }
 
-main .air.air2 {
+header .air.air2 {
   animation: wave2 15s linear infinite;
   z-index: 999;
   opacity: 0.5;
@@ -26,7 +26,7 @@ main .air.air2 {
   background-position-x: 250px;
 }
 
-main .air.air3 {
+header .air.air3 {
   animation: wave 30s linear infinite;
   z-index: 998;
   opacity: 0.2;
@@ -35,7 +35,7 @@ main .air.air3 {
   background-position-x: 100px;
 }
 
-main .air.air4 {
+header .air.air4 {
   z-index: 997;
   opacity: 0.7;
   animation-delay: -5s;

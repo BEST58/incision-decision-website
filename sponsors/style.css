@@ -61,6 +61,7 @@ header {
     position: relative;
     width: 100%;
     overflow: hidden;
+    padding-bottom: 7.5rem;
 }
 
 main > div {
@@ -90,11 +91,11 @@ section {
 main {
     display: flex;
     padding: 2rem;
-    padding-bottom: 10rem;
+    padding-bottom: 3rem;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    background-color: var(--main-bg-color);
+    background-color: #FFF;
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -134,4 +135,15 @@ main img {
 .parentsponsor{
     display: flex;
     flex-direction: column;    
+}
+
+.centerImg{
+
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+.subheader{
+    text-align: center;
 }
