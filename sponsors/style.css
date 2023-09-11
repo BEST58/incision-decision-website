@@ -54,7 +54,6 @@ nav a {
 header {
     display: flex;
     padding: 2rem;
-    padding-bottom: 10rem;
     justify-content: center;
     align-items: center;
     flex-direction: row;
@@ -121,4 +120,18 @@ main h2 {
 main img {
     width: 75%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.sponsor{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.sponsor > div{
+    flex: 1;
+}
+.parentsponsor{
+    display: flex;
+    flex-direction: column;    
 }
