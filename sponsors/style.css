@@ -88,3 +88,37 @@ header img {
 section {
     text-align: center;
 }
+main {
+    display: flex;
+    padding: 2rem;
+    padding-bottom: 10rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: var(--main-bg-color);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+main > div {
+    flex: 2;
+}
+
+main > div.right {
+    flex: 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+main h1,
+main h2 {
+    text-align: center;
+}
+
+main img {
+    width: 75%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
