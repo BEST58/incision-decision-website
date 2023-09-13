@@ -54,7 +54,6 @@ nav a {
 header {
     display: flex;
     padding: 2rem;
-    padding-bottom: 10rem;
     justify-content: center;
     align-items: center;
     flex-direction: row;
@@ -62,13 +61,14 @@ header {
     position: relative;
     width: 100%;
     overflow: hidden;
+    padding-bottom: 7.5rem;
 }
 
-header > div {
+main > div {
     flex: 2;
 }
 
-header > div.right {
+main > div.right {
     flex: 3;
     display: flex;
     flex-direction: row;
@@ -76,15 +76,74 @@ header > div.right {
     align-items: center;
 }
 
-header h1,
-header h2 {
+main h1,
+main h2 {
     text-align: center;
 }
 
-header img {
+main img {
     width: 75%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 section {
+    text-align: center;
+}
+main {
+    display: flex;
+    padding: 2rem;
+    padding-bottom: 3rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: #FFF;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+main > div {
+    flex: 2;
+}
+
+main > div.right {
+    flex: 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+main h1,
+main h2 {
+    text-align: center;
+}
+
+main img {
+    width: 75%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.sponsor{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.sponsor > div{
+    flex: 1;
+}
+.parentsponsor{
+    display: flex;
+    flex-direction: column;    
+}
+
+.centerImg{
+
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+.subheader{
     text-align: center;
 }
