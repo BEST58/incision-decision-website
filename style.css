@@ -9,7 +9,7 @@
 
 html,
 body {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 html,
@@ -36,6 +36,7 @@ nav {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    z-index: 9999;
 }
 
 nav>ul {
@@ -73,6 +74,7 @@ nav a {
 .logoText {
     padding-left: 5%;
     font-size: 4rem;
+    transition: 0.2s;
 }
 nav #headerLogo {
     transition: 0.2s;
