@@ -6,10 +6,20 @@ class Pacman {
     }
 
     draw(ctx) {
-        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-        ctx.fillStyle = "yellow";
+        ctx.strokeStyle = 'yellow';
+        ctx.fillStyle = 'yellow';
+        ctx.lineWidth = 3;
+        
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, Math.PI / 6, Math.PI, false);
+        ctx.closePath();
         ctx.fill();
+        ctx.stroke();
 
-        this.x += 5;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, Math.PI, Math.PI * 11 / 6, false);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
     }
 }
