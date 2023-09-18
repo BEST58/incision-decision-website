@@ -9,7 +9,7 @@
 
 html,
 body {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 html,
@@ -36,6 +36,7 @@ nav {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    z-index: 9999;
 }
 
 nav>ul {
@@ -57,9 +58,28 @@ nav a {
     font-size: 1.75rem;
     text-decoration: none;
 }
-
+.navList{
+    flex: 1;
+    padding: 0;
+    justify-content: center;
+    text-align: center;
+}
+.navLogo {
+    flex: 2;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.logoText {
+    padding-left: 5%;
+    font-size: 4rem;
+    transition: 0.2s;
+}
 nav #headerLogo {
     transition: 0.2s;
+    width:50%;
+    max-width: 150px;
 }
 
 header {
