@@ -1,0 +1,12 @@
+.cube1 {
+    display: flex;
+    padding: 2rem;
+    padding-bottom: 10rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    flex-wrap: nowrap;
+}
