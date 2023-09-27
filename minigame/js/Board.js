@@ -120,6 +120,18 @@ class Board {
             [[this.x + (this.width / 2) + 8, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8 - 32], [this.x + (this.width / 2) + 8, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
             [[this.x + (this.width / 2) - 8, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8 - 32], [this.x + (this.width / 2) - 8, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
             [[this.x + (this.width / 2) + 8, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8], [this.x + (this.width / 2) - 8, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
+
+            
+            [[this.x + 32 * 3 + 48 + 16,this.y + (this.height * 2 / 3) - 4], [this.x + (this.width / 2) - 8 ,this.y + (this.height * 2 / 3) - 4]],
+            [[this.x + (this.width / 2) + 8,this.y + (this.height * 2 / 3) - 4], [endX - 32 * 3 - 48 - 16,this.y + (this.height * 2 / 3) - 4]],
+            [[endX - 32 * 3 - 48 - 16, this.y + 32 * 3 + middleX - 32], [endX - 32 * 3 - 48 - 16, this.y + 32 * 3 + middleX - 4] ],
+            [[this.x + 32 * 3 + 48 + 16, this.y + 32 * 3 + middleX - 32], [this.x + 32 * 3 + 48 + 16, this.y + 32 * 3 + middleX - 4] ],
+            [[this.x + 32 * 3 + 48 + 16, this.y + 32 * 3 + middleX - 32], [endX - 32 * 3 - 48 - 16, this.y + 32 * 3 + middleX - 32] ],
+            [[this.x + (this.width / 2) - 8, (this.height * 2 / 3) + 10 - 4], [this.x + (this.width / 2) - 8, (this.height * 2 / 3) + 48 + 4] ],
+            [[this.x + (this.width / 2) + 8, (this.height * 2 / 3) + 10 - 4], [this.x + (this.width / 2) + 8, (this.height * 2 / 3) + 48 + 4] ],
+            [[this.x + (this.width / 2) - 8, (this.height * 2 / 3) + 48 + 4], [this.x + (this.width / 2) + 8, (this.height * 2 / 3) + 48 + 4] ],
+            
+
             
         )
     }
