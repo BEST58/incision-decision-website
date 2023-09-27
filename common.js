@@ -1,4 +1,7 @@
 window.onscroll = function() {scrollFunction()};
+window.addEventListener("load", () => {
+  scrollFunction()
+});
 
 function scrollFunction() {
   console.log(document.documentElement.scrollTop)
