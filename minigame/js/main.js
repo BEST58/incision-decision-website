@@ -5,6 +5,9 @@ const pacman = new Pacman(10, 27, 27);
 const board = new Board(10, 10, 448, 496);
 //I need ghost pos
 //const ghost = new Ghost (10, ??, ??);
+//const ghost = new GhostTwo (10, ??, ??);
+//const ghost = new GhostThree (10, ??, ??);
+//const ghost = new GhostFour (10, ??, ??);
 
 function animate() {
 
