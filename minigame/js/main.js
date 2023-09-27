@@ -3,6 +3,8 @@ var fpsInterval, startTime, now, then, elapsed, ctx;
 
 const pacman = new Pacman(10, 27, 27);
 const board = new Board(10, 10, 448, 496);
+//I need ghost pos
+//const ghost = new Ghost (10, ??, ??);
 
 function animate() {
 
