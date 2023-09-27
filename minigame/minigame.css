@@ -1,10 +1,10 @@
-body{
+body {
     margin: 0;
     padding: 0;
 }
-.board{
- 
+
+.board {
     background-color: gray;
-    width: 1000px;
-    height: 500px;
+    width: 468px;
+    height: 516px;
 }
