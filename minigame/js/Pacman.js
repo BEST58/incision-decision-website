@@ -62,6 +62,34 @@ class Pacman {
         }
     }
 
+    calcIntersect(bounds){
+     //   console.log(bounds[1][0])
+     let spacing = 5
+        for(let i = 0; i < bounds.length; i++){
+            if(this.velocity.x > 0){
+                if(this.x + this.radius + spacing == bounds[i][0][0] && ((this.y > bounds[i][0][1] && this.y < bounds[i][1][1]) || (this.y < bounds[i][0][1] && this.y > bounds[i][1][1]))){
+                    this.velocity.x = 0
+                }
+            }
+            if(this.velocity.x < 0){
+                if(this.x - this.radius - spacing == bounds[i][0][0] && ((this.y > bounds[i][0][1] && this.y < bounds[i][1][1]) || (this.y < bounds[i][0][1] && this.y > bounds[i][1][1]))){
+                    this.velocity.x = 0
+                }
+            }
+            if(this.velocity.y > 0){
+                if(this.y + this.radius + spacing == bounds[i][0][1] && ((this.x > bounds[i][0][0] && this.x < bounds[i][1][0]) || (this.x < bounds[i][0][0] && this.x > bounds[i][1][0]))){
+                    this.velocity.y = 0
+                }
+            }
+            if(this.velocity.y < 0){
+                if(this.y - this.radius - spacing == bounds[i][0][1] && ((this.x > bounds[i][0][0] && this.x < bounds[i][1][0]) || (this.x < bounds[i][0][0] && this.x > bounds[i][1][0]))){
+                    this.velocity.y = 0
+                }
+            }
+        }
+        
+    }
+
     draw(ctx) {
         ctx.strokeStyle = 'yellow';
         ctx.fillStyle = 'yellow';

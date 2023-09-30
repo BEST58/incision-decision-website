@@ -11,6 +11,13 @@
     flex-wrap: nowrap;
 }
 
+#animation-container {
+    background-color: rgba(0,0,0,0);
+    width: 100%;
+    height: 100vh;
+}
+
+
 /*body {
     background-image: linear-gradient(45deg, #7db8e7 33.333%, #B4CDED 33.333%, #124559 33.333%);
 }*/
