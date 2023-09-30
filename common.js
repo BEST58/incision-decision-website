@@ -4,7 +4,7 @@ window.addEventListener("load", () => {
 });
 
 function scrollFunction() {
-  console.log(document.documentElement.scrollTop)
+  
   if (document.documentElement.scrollTop > 80) {
     document.getElementById("headerLogo").style.height = "90px";
     document.getElementById("headerLogo").style.width = "90px";
