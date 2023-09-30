@@ -7,15 +7,10 @@ class Pacman {
     }
 
     doesIntersect(boundary) {
-        const tL = {
-            x: this.x - this.radius,
-            y: this.y - this.radius
-        }
-        
-        if (this.x - this.radius < boundary.tl.x || this.x + this.radius > boundary.br.x) return false;
-        if (this.y - this.radius < boundary.tl.y || this.y + this.radius > boundary.br.y) return false;
-
-        return true;
+        return (this.tl.x <= boundary.br.x &&
+            boundary.tl.x <= this.br.x &&
+            this.tl.y <= boundary.br.y &&
+            boundary.tl.y <= this.br.y)
     }
 
     calc(bounds) {
@@ -23,6 +18,16 @@ class Pacman {
 
         this.x += this.velocity.x;
         this.y += this.velocity.y;
+
+        this.tl = {
+            x: this.x - this.radius,
+            y: this.y - this.radius
+        }
+
+        this.br = {
+            x: this.x + this.radius,
+            y: this.y + this.radius
+        }
 
         for (let i = 0; i < bounds.length; i++) {
             const boundary = {
@@ -37,7 +42,22 @@ class Pacman {
             }
             
             if (this.doesIntersect(boundary)) {
-                console.log(`Does intersect`)
+                // if (this.br.x > boundary.tl.x && this.velocity.x > 0) {
+                //     this.x = boundary.tl.x - this.radius * 1.5;
+                // } else if (this.tl.x < boundary.br.x && this.velocity.x < 0) {
+                //     this.x = boundary.br.x * 1.5;
+                // }
+
+                // if (this.br.y > boundary.tl.y && this.velocity.y > 0) {
+                //     this.y = boundary.tl.y - this.radius * 1.5;
+                // } else if (this.tl.y < boundary.br.y && this.velocity.y < 0) {
+                //     this.y = boundary.br.y * 1.5;
+                // }
+
+                this.x -= this.velocity.x;
+                this.y -= this.velocity.y;
+
+                break;
             }
         }
     }
