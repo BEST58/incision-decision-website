@@ -3,6 +3,7 @@ var fpsInterval, startTime, now, then, elapsed, ctx;
 
 const pacman = new Pacman(10, 27, 27);
 const board = new Board(10, 10, 448, 496);
+const pellet = new Pellet(106, 91, 3);
 //I need ghost pos
 //const ghost = new Ghost (10, ??, ??);
 //const ghost = new GhostTwo (10, ??, ??);
@@ -32,6 +33,7 @@ function animate() {
 
     pacman.calc(board.lines);
 
+    pellet.draw(ctx)
     board.draw(ctx);
     pacman.draw(ctx);
   }

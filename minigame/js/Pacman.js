@@ -4,13 +4,26 @@ class Pacman {
         this.x = startingX;
         this.y = startingY;
         this.velocity = { x : 0, y: 0 };
+        this.spacing = 2.5
     }
 
     doesIntersect(boundary) {
-        return (this.tl.x <= boundary.br.x &&
-            boundary.tl.x <= this.br.x &&
-            this.tl.y <= boundary.br.y &&
-            boundary.tl.y <= this.br.y)
+        return (this.tl.x <= boundary.br.x + this.spacing &&
+            boundary.tl.x <= this.br.x + this.spacing&&
+            this.tl.y <= boundary.br.y + this.spacing &&
+            boundary.tl.y <= this.br.y + this.spacing)
+    }
+
+    getBoundary(){
+        this.tl = {
+            x: this.x - this.radius,
+            y: this.y - this.radius
+        }
+
+        this.br = {
+            x: this.x + this.radius,
+            y: this.y + this.radius
+        }
     }
 
     calc(bounds) {
@@ -32,7 +45,7 @@ class Pacman {
         for (let i = 0; i < bounds.length; i++) {
             const boundary = {
                 tl: {
-                    x: Math.min(bounds[i][0][0],  bounds[i][1][0]) ,
+                    x: Math.min(bounds[i][0][0],  bounds[i][1][0]),
                     y: Math.min(bounds[i][0][1], bounds[i][1][1]) 
                 },
                 br: {
