@@ -31,7 +31,6 @@ function animate() {
     ctx.reset();
 
     pacman.calc(board.lines);
-    pacman.calcIntersect(board.lines)
 
     board.draw(ctx);
     pacman.draw(ctx);

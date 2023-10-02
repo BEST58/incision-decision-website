@@ -32,13 +32,13 @@ class Pacman {
         for (let i = 0; i < bounds.length; i++) {
             const boundary = {
                 tl: {
-                    x: bounds[i][0][0],
-                    y: bounds[i][0][1]
+                    x: Math.min(bounds[i][0][0],  bounds[i][1][0]) ,
+                    y: Math.min(bounds[i][0][1], bounds[i][1][1]) 
                 },
                 br: {
-                    x: bounds[i][1][0],
-                    y: bounds[i][1][1]
-                }
+                    x: Math.max(bounds[i][0][0],  bounds[i][1][0]),
+                    y: Math.max(bounds[i][0][1], bounds[i][1][1])
+                 }
             }
             
             if (this.doesIntersect(boundary)) {
@@ -62,7 +62,7 @@ class Pacman {
         }
     }
 
-    calcIntersect(bounds){
+   /* calcIntersect(bounds){
      //   console.log(bounds[1][0])
      let spacing = 5
         for(let i = 0; i < bounds.length; i++){
@@ -88,7 +88,7 @@ class Pacman {
             }
         }
         
-    }
+    }*/
 
     draw(ctx) {
         ctx.strokeStyle = 'yellow';

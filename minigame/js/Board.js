@@ -77,7 +77,7 @@ class Board {
             [[this.x + 32, this.y + 32 * 3], [this.x + 32 + 48, this.y + 32 * 3]],
             [[this.x + 32 + 48, this.y + 32 * 3], [this.x + 32 + 48, this.y + (this.height / 3) - 32]],
             [[this.x + 32 + 48, this.y + (this.height / 3) - 32], [this.x + 32, this.y + (this.height / 3) - 32]],
-            [[this.x + 32, this.y + (this.height / 3) - 32], [this.x + 32, this.y + 32 * 3]],
+            [[this.x + 32, this.y + 32 * 3], [this.x + 32, this.y + (this.height / 3) - 32]],
 
             [[this.x + 32 + 48 + 32, this.y + 32 * 3], [this.x + 32 + 48 + 32 + 16, this.y + 32 * 3]],
             [[this.x + 32 + 48 + 32 + 16, this.y + 32 * 3], [this.x + 32 + 48 + 32 + 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8]],
