@@ -1,14 +1,16 @@
-// Need info for ghosts
-
-//Making something that should happen when pacman touches the ghost, not to be used or at least not now as this is just to give me an idea of what to do
+//Making something that should happen when pacman touches the ghost, not to be used or at least not now as this is just to give me an idea of what to do and make any improvements.
 
 /*
 
-if Ghost(X, Y) == Pacman(X, Y) {
-  return doStop;
+var allGhosts = document.querySelectorAll('Ghost, GhostTwo, GhostThree, GhostFour');
+
+var gameEnd = False;
+
+if Ghost(X, Y) || GhostTwo(X, Y) || GhostThree(X, Y) || GhostFour(X, Y) == Pacman(X, Y) {
+  return gameEnd;
 }
 
-//Trying to calculate for ghost
+//Trying to calculate pos for ghost as Brett said using what's similar for pacman. Will figure this out later and get basics done first
 
   calcIntersect(bounds){
      //   console.log(bounds[1][0])
