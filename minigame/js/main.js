@@ -4,7 +4,8 @@ var fpsInterval, startTime, now, then, elapsed, ctx;
 const pacman = new Pacman(10, 27, 27);
 const board = new Board(10, 10, 448, 496);
 const pellet = new Pellet(106, 91, 3);
-//I need ghost pos
+
+// Ghost pos: board.x + board.width / 2, board.y + board.height / 2 
 //const ghost = new Ghost (10, ??, ??);
 //const ghost = new GhostTwo (10, ??, ??);
 //const ghost = new GhostThree (10, ??, ??);
@@ -59,23 +60,23 @@ document.addEventListener('keydown', ({ key }) => {
   switch(key) {
     case 'w':
     case 'ArrowUp':
-      pacman.velocity.y = -1;
-      pacman.velocity.x = 0;
+      pacman.velocity.y = -3;
+      // pacman.velocity.x = 0;
       break;
     case 's':
     case 'ArrowDown':
-      pacman.velocity.y = 1;
-      pacman.velocity.x = 0;
+      pacman.velocity.y = 3;
+      // pacman.velocity.x = 0;
       break;
     case 'a':
     case 'ArrowLeft':
-      pacman.velocity.x = -1;
-      pacman.velocity.y = 0;
+      pacman.velocity.x = -3;
+      // pacman.velocity.y = 0;
       break;
     case 'd':
     case 'ArrowRight':
-      pacman.velocity.x = 1;
-      pacman.velocity.y = 0;
+      pacman.velocity.x = 3;
+      // pacman.velocity.y = 0;
       break;
   }
 });
