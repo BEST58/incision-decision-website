@@ -54,52 +54,52 @@ class Board {
 
         // Inside obstacles
         this.lines.push(
-            [[this.x + 32, this.y + 32], [this.x + 32 + 48, this.y + 32]],
-            [[this.x + 32 + 48, this.y + 32], [this.x + 32 + 48, this.y + 32 + 32]],
-            [[this.x + 32 + 48, this.y + 32 + 32], [this.x + 32, this.y + 32 + 32]],
+            [[this.x + 32, this.y + 32], [this.x + this.width / 6, this.y + 32]],
+            [[this.x + this.width / 6, this.y + 32], [this.x + this.width / 6, this.y + 32 + 32]],
+            [[this.x + this.width / 6, this.y + 32 + 32], [this.x + 32, this.y + 32 + 32]],
             [[this.x + 32, this.y + 32], [this.x + 32, this.y + 32 + 32]],
             
-            [[this.x + 32 + 48 + 32, this.y + 32], [middleX - 8 - 32, this.y + 32]],
+            [[this.x + this.width / 6 + 32, this.y + 32], [middleX - 8 - 32, this.y + 32]],
             [[middleX - 8 - 32, this.y + 32], [middleX - 8 - 32, this.y + 32 + 32]],
-            [[middleX - 8 - 32, this.y + 32 + 32], [this.x + 32 + 48 + 32, this.y + 32 + 32]],
-            [[this.x + 32 + 48 + 32, this.y + 32], [this.x + 32 + 48 + 32, this.y + 32 + 32]],
+            [[middleX - 8 - 32, this.y + 32 + 32], [this.x + this.width / 6 + 32, this.y + 32 + 32]],
+            [[this.x + this.width / 6 + 32, this.y + 32], [this.x + this.width / 6 + 32, this.y + 32 + 32]],
 
-            [[endX - 32, this.y + 32], [endX - 32 - 48, this.y + 32]],
-            [[endX - 32 - 48, this.y + 32], [endX - 32 - 48, this.y + 32 + 32]],
-            [[endX - 32 - 48, this.y + 32 + 32], [endX - 32, this.y + 32 + 32]],
+            [[endX - 32, this.y + 32], [this.x + this.width * 5 / 6, this.y + 32]],
+            [[this.x + this.width * 5 / 6, this.y + 32], [this.x + this.width * 5 / 6, this.y + 32 + 32]],
+            [[this.x + this.width * 5 / 6, this.y + 32 + 32], [endX - 32, this.y + 32 + 32]],
             [[endX - 32, this.y + 32], [endX - 32, this.y + 32 + 32]],
             
-            [[endX - 32 - 48 - 32, this.y + 32], [middleX + 8 + 32, this.y + 32]],
+            [[this.x + this.width * 5 / 6 - 32, this.y + 32], [middleX + 8 + 32, this.y + 32]],
             [[middleX + 8 + 32, this.y + 32], [middleX + 8 + 32, this.y + 32 + 32]],
-            [[middleX + 8 + 32, this.y + 32 + 32], [endX - 32 - 48 - 32, this.y + 32 + 32]],
-            [[endX - 32 - 48 - 32, this.y + 32], [endX - 32 - 48 - 32, this.y + 32 + 32]],
+            [[middleX + 8 + 32, this.y + 32 + 32], [this.x + this.width * 5 / 6 - 32, this.y + 32 + 32]],
+            [[this.x + this.width * 5 / 6 - 32, this.y + 32], [this.x + this.width * 5 / 6 - 32, this.y + 32 + 32]],
 
-            [[this.x + 32, this.y + 32 * 3], [this.x + 32 + 48, this.y + 32 * 3]],
-            [[this.x + 32 + 48, this.y + 32 * 3], [this.x + 32 + 48, this.y + (this.height / 3) - 32]],
-            [[this.x + 32 + 48, this.y + (this.height / 3) - 32], [this.x + 32, this.y + (this.height / 3) - 32]],
+            [[this.x + 32, this.y + 32 * 3], [this.x + this.width / 6, this.y + 32 * 3]],
+            [[this.x + this.width / 6, this.y + 32 * 3], [this.x + this.width / 6, this.y + (this.height / 3) - 32]],
+            [[this.x + this.width / 6, this.y + (this.height / 3) - 32], [this.x + 32, this.y + (this.height / 3) - 32]],
             [[this.x + 32, this.y + 32 * 3], [this.x + 32, this.y + (this.height / 3) - 32]],
 
-            [[this.x + 32 + 48 + 32, this.y + 32 * 3], [this.x + 32 + 48 + 32 + 16, this.y + 32 * 3]],
-            [[this.x + 32 + 48 + 32 + 16, this.y + 32 * 3], [this.x + 32 + 48 + 32 + 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8]],
-            [[this.x + 32 + 48 + 32 + 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8], [middleX - 8 - 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8]],
-            [[this.x + 32 + 48 + 32, this.y + 32 * 3], [this.x + 32 + 48 + 32, (this.y + (this.height / 2) - 16)]],
-            [[this.x + 32 + 48 + 32 + 16, (this.y + (this.height / 2) - 16)], [this.x + 32 + 48 + 32 + 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
-            [[this.x + 32 + 48 + 32, (this.y + (this.height / 2) - 16)], [this.x + 32 + 48 + 32 + 16, (this.y + (this.height / 2) - 16)]],
-            [[this.x + 32 + 48 + 32 + 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8], [middleX - 8 - 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
+            [[this.x + this.width / 6 + 32, this.y + 32 * 3], [this.x + this.width / 6 + 32 + 16, this.y + 32 * 3]],
+            [[this.x + this.width / 6 + 32 + 16, this.y + 32 * 3], [this.x + this.width / 6 + 32 + 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8]],
+            [[this.x + this.width / 6 + 32 + 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8], [middleX - 8 - 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8]],
+            [[this.x + this.width / 6 + 32, this.y + 32 * 3], [this.x + this.width / 6 + 32, (this.y + (this.height / 2) - 16)]],
+            [[this.x + this.width / 6 + 32 + 16, (this.y + (this.height / 2) - 16)], [this.x + this.width / 6 + 32 + 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
+            [[this.x + this.width / 6 + 32, (this.y + (this.height / 2) - 16)], [this.x + this.width / 6 + 32 + 16, (this.y + (this.height / 2) - 16)]],
+            [[this.x + this.width / 6 + 32 + 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8], [middleX - 8 - 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
             [[middleX - 8 - 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8], [middleX - 8 - 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
 
-            [[endX - 32, this.y + 32 * 3], [endX - 32 - 48, this.y + 32 * 3]],
-            [[endX - 32 - 48, this.y + 32 * 3], [endX - 32 - 48, this.y + (this.height / 3) - 32]],
-            [[endX - 32 - 48, this.y + (this.height / 3) - 32], [endX - 32, this.y + (this.height / 3) - 32]],
+            [[endX - 32, this.y + 32 * 3], [this.x + this.width * 5 / 6, this.y + 32 * 3]],
+            [[this.x + this.width * 5 / 6, this.y + 32 * 3], [this.x + this.width * 5 / 6, this.y + (this.height / 3) - 32]],
+            [[this.x + this.width * 5 / 6, this.y + (this.height / 3) - 32], [endX - 32, this.y + (this.height / 3) - 32]],
             [[endX - 32, this.y + (this.height / 3) - 32], [endX - 32, this.y + 32 * 3]],
 
-            [[endX - 32 - 48 - 32, this.y + 32 * 3], [endX - 32 - 48 - 32 - 16, this.y + 32 * 3]],
-            [[endX - 32 - 48 - 32 - 16, this.y + 32 * 3], [endX - 32 - 48 - 32 - 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8]],
-            [[endX - 32 - 48 - 32 - 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8], [middleX + 8 + 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8]],
-            [[endX - 32 - 48 - 32, this.y + 32 * 3], [endX - 32 - 48 - 32, (this.y + (this.height / 2) - 16)]],
-            [[endX - 32 - 48 - 32 - 16, (this.y + (this.height / 2) - 16)], [endX - 32 - 48 - 32 - 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
-            [[endX - 32 - 48 - 32, (this.y + (this.height / 2) - 16)], [endX - 32 - 48 - 32 - 16, (this.y + (this.height / 2) - 16)]],
-            [[endX - 32 - 48 - 32 - 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8], [middleX + 8 + 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
+            [[this.x + this.width * 5 / 6 - 32, this.y + 32 * 3], [this.x + this.width * 5 / 6 - 32 - 16, this.y + 32 * 3]],
+            [[this.x + this.width * 5 / 6 - 32 - 16, this.y + 32 * 3], [this.x + this.width * 5 / 6 - 32 - 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8]],
+            [[this.x + this.width * 5 / 6 - 32 - 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8], [middleX + 8 + 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8]],
+            [[this.x + this.width * 5 / 6 - 32, this.y + 32 * 3], [this.x + this.width * 5 / 6 - 32, (this.y + (this.height / 2) - 16)]],
+            [[this.x + this.width * 5 / 6 - 32 - 16, (this.y + (this.height / 2) - 16)], [this.x + this.width * 5 / 6 - 32 - 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
+            [[this.x + this.width * 5 / 6 - 32, (this.y + (this.height / 2) - 16)], [this.x + this.width * 5 / 6 - 32 - 16, (this.y + (this.height / 2) - 16)]],
+            [[this.x + this.width * 5 / 6 - 32 - 16, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8], [middleX + 8 + 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
             [[middleX + 8 + 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 - 8], [middleX + 8 + 32, (this.y + 32 * 3 + this.y + (this.height / 2) - 16) / 2 + 8]],
 
             [[this.x + this.width / 6 + 32, this.y + (this.height / 2) + 16], [this.x + this.width / 6 + 32 + 16, this.y + (this.height / 2) + 16]],
@@ -130,9 +130,6 @@ class Board {
             [[this.x + (this.width / 2) - 8, (this.height * 2 / 3) + 10 - 4], [this.x + (this.width / 2) - 8, (this.height * 2 / 3) + 48 + 4] ],
             [[this.x + (this.width / 2) + 8, (this.height * 2 / 3) + 10 - 4], [this.x + (this.width / 2) + 8, (this.height * 2 / 3) + 48 + 4] ],
             [[this.x + (this.width / 2) - 8, (this.height * 2 / 3) + 48 + 4], [this.x + (this.width / 2) + 8, (this.height * 2 / 3) + 48 + 4] ],
-            
-
-            
         )
     }
 

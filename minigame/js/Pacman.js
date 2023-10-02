@@ -4,6 +4,7 @@ class Pacman {
         this.x = startingX;
         this.y = startingY;
         this.velocity = { x : 0, y: 0 };
+        this.angle = 0;
     }
 
     doesIntersect(boundary) {
@@ -11,6 +12,13 @@ class Pacman {
             boundary.tl.x <= this.br.x &&
             this.tl.y <= boundary.br.y &&
             boundary.tl.y <= this.br.y)
+    }
+
+    doesIntersectOffset(boundary, xOffset, yOffset) {
+        return (this.tl.x + xOffset <= boundary.br.x &&
+            boundary.tl.x <= this.br.x + xOffset &&
+            this.tl.y + yOffset <= boundary.br.y &&
+            boundary.tl.y <= this.br.y + yOffset)
     }
 
     calc(bounds) {
@@ -29,6 +37,11 @@ class Pacman {
             y: this.y + this.radius
         }
 
+        var hasBeenUndone = {
+            x: false,
+            y: false
+        };
+
         for (let i = 0; i < bounds.length; i++) {
             const boundary = {
                 tl: {
@@ -42,22 +55,37 @@ class Pacman {
             }
             
             if (this.doesIntersect(boundary)) {
-                // if (this.br.x > boundary.tl.x && this.velocity.x > 0) {
-                //     this.x = boundary.tl.x - this.radius * 1.5;
-                // } else if (this.tl.x < boundary.br.x && this.velocity.x < 0) {
-                //     this.x = boundary.br.x * 1.5;
-                // }
+                const causedByX = !this.doesIntersectOffset(boundary, -this.velocity.x * 1.5, 0);
+                if (causedByX && !hasBeenUndone.x) {
+                    hasBeenUndone.x = true;
+                    if (this.velocity.x > 0) {
+                        this.x = boundary.tl.x - this.radius - 3;
+                    } else if (this.velocity.x < 0) {
+                        this.x = boundary.br.x + this.radius + 3;
+                    }
+                }
 
-                // if (this.br.y > boundary.tl.y && this.velocity.y > 0) {
-                //     this.y = boundary.tl.y - this.radius * 1.5;
-                // } else if (this.tl.y < boundary.br.y && this.velocity.y < 0) {
-                //     this.y = boundary.br.y * 1.5;
-                // }
+                const causedByY = !this.doesIntersectOffset(boundary, 0, -this.velocity.y * 1.5);
+                if (causedByY && !hasBeenUndone.y) {
+                    hasBeenUndone.y = true;
+                    if (this.velocity.y > 0) {
+                        this.y = boundary.tl.y - this.radius - 3;
+                    } else if (this.velocity.y < 0) {
+                        this.y = boundary.br.y + this.radius + 3;
+                    }
+                }
+            }
+        }
 
-                this.x -= this.velocity.x;
-                this.y -= this.velocity.y;
-
-                break;
+        if (!hasBeenUndone.x || !hasBeenUndone.y) {
+            if (this.velocity.x > 0 && !hasBeenUndone.x) {
+                this.angle = 0;
+            } else if (this.velocity.x < 0 && !hasBeenUndone.x) {
+                this.angle = Math.PI;
+            } else if (this.velocity.y > 0 && !hasBeenUndone.y) {
+                this.angle = Math.PI / 2;
+            } else if (this.velocity.y < 0 && !hasBeenUndone.y) {
+                this.angle = Math.PI * 3 / 2;
             }
         }
     }
@@ -96,13 +124,13 @@ class Pacman {
         ctx.lineWidth = 3;
         
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI / 6, Math.PI, false);
+        ctx.arc(this.x, this.y, this.radius, this.angle + Math.PI / 6, this.angle + Math.PI, false);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI, Math.PI * 11 / 6, false);
+        ctx.arc(this.x, this.y, this.radius, this.angle + Math.PI, this.angle + Math.PI * 11 / 6, false);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
