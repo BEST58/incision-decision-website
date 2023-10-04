@@ -33,6 +33,7 @@ function animate() {
     ctx.reset();
 
     pacman.calc(board.lines);
+    console.log(pellet.getBoundary())
 
     pellet.draw(ctx)
     board.draw(ctx);
@@ -60,23 +61,23 @@ document.addEventListener('keydown', ({ key }) => {
   switch(key) {
     case 'w':
     case 'ArrowUp':
-      pacman.velocity.y = -3;
-      // pacman.velocity.x = 0;
+      pacman.velocity.y = -1;
+       pacman.velocity.x = 0;
       break;
     case 's':
     case 'ArrowDown':
-      pacman.velocity.y = 3;
-      // pacman.velocity.x = 0;
+      pacman.velocity.y = 1;
+       pacman.velocity.x = 0;
       break;
     case 'a':
     case 'ArrowLeft':
-      pacman.velocity.x = -3;
-      // pacman.velocity.y = 0;
+      pacman.velocity.x = -1;
+       pacman.velocity.y = 0;
       break;
     case 'd':
     case 'ArrowRight':
-      pacman.velocity.x = 3;
-      // pacman.velocity.y = 0;
+      pacman.velocity.x = 1;
+       pacman.velocity.y = 0;
       break;
   }
 });

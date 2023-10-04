@@ -136,13 +136,13 @@ class Pacman {
         ctx.lineWidth = 3;
         
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, this.angle + Math.PI / 6, this.angle + Math.PI, false);
+        ctx.arc(this.x, this.y, this.radius * .9, this.angle + Math.PI / 6, this.angle + Math.PI, false);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, this.angle + Math.PI, this.angle + Math.PI * 11 / 6, false);
+        ctx.arc(this.x, this.y, this.radius * .9, this.angle + Math.PI, this.angle + Math.PI * 11 / 6, false);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
