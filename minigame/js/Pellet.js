@@ -1,10 +1,10 @@
-class Pellet{
-    constructor(x,y,radius){
+class Pellet {
+    constructor(x, y, radius) {
         this.x = x;
         this.y = y;
         this.radius = radius;
 
-       this.tl = {
+        this.tl = {
             x: this.x - this.radius,
             y: this.y - this.radius
         }
@@ -13,7 +13,13 @@ class Pellet{
             x: this.x + this.radius,
             y: this.y + this.radius
         }
-    
+
+    }
+
+    getCenter() {
+
+      return [this.x,this.y]
+      
     }
 
     draw(ctx) {
