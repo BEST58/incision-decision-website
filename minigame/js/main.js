@@ -1,9 +1,19 @@
 var doStop = false;
 var fpsInterval, startTime, now, then, elapsed, ctx;
 
-const pacman = new Pacman(10, 27, 27);
-const board = new Board(10, 10, 448, 496);
-const pellet = new Pellet(106, 91, 3);
+const pacman = new Pacman(10, 27, 57);
+const board = new Board(10, 40, 448, 496);
+
+var names = {}
+var pellets = {}
+
+
+pellet1 = new Pellet(50, 57, 3)
+pellet2 = new Pellet(70, 57, 3)
+pellet3 = new Pellet(90, 57, 3)
+pellet4 = new Pellet(110, 57, 3)
+pellet5 = new Pellet(130, 57, 3)
+pellet6 = new Pellet(150, 57, 3)
 
 // Ghost pos: board.x + board.width / 2, board.y + board.height / 2 
 //const ghost = new Ghost (10, ??, ??);
@@ -33,9 +43,21 @@ function animate() {
     ctx.reset();
 
     pacman.calc(board.lines);
-    console.log(pellet.getBoundary())
 
-    pellet.draw(ctx)
+     pacman.doesIntersectPellet(pellet1)
+    pellet1.draw(ctx)
+    pacman.doesIntersectPellet(pellet2)
+    pellet2.draw(ctx)
+    pacman.doesIntersectPellet(pellet3)
+    pellet3.draw(ctx)
+    pacman.doesIntersectPellet(pellet4)
+    pellet4.draw(ctx)
+    pacman.doesIntersectPellet(pellet5)
+    pellet5.draw(ctx)
+      
+    
+    
+
     board.draw(ctx);
     pacman.draw(ctx);
   }
@@ -47,6 +69,8 @@ function startAnimating(fps) {
   startTime = then;
   animate();
 }
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
 

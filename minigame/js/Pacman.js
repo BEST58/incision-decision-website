@@ -5,6 +5,7 @@ class Pacman {
         this.y = startingY;
         this.velocity = { x : 0, y: 0 };
         this.spacing = 2.5
+        this.score = 0
     }
 
     doesIntersect(boundary) {
@@ -14,23 +15,36 @@ class Pacman {
             boundary.tl.y <= this.br.y + this.spacing)
     }
 
-    getBoundary(){
-        this.tl = {
-            x: this.x - this.radius,
-            y: this.y - this.radius
-        }
 
-        this.br = {
-            x: this.x + this.radius,
-            y: this.y + this.radius
-        }
-    }
+    getBoundary() {
+
+        const boundary = {
+               tl: {
+                   x: this.x - this.radius,
+                   y: this.y - this.radius 
+               },
+               br: {
+                   x: this.x + this.radius,
+                   y: this.y + this.radius
+                }
+           }
+           return boundary
+       }
 
     doesIntersectOffset(boundary, xOffset, yOffset) {
         return (this.tl.x + xOffset <= boundary.br.x &&
             boundary.tl.x <= this.br.x + xOffset &&
             this.tl.y + yOffset <= boundary.br.y &&
             boundary.tl.y <= this.br.y + yOffset)
+    }
+
+    doesIntersectPellet(pellet){
+        if(pellet.getCenter()[0] > this.x - this.radius && pellet.getCenter()[0] < this.x + this.radius && pellet.getCenter()[1] > this.y - this.radius && pellet.getCenter()[1] < this.y + this.radius){
+            this.score+=10
+            delete pellet.x
+            delete pellet.y
+        }
+        
     }
 
     calc(bounds) {
@@ -146,5 +160,9 @@ class Pacman {
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
+
+        ctx.fillStyle = "black";
+        ctx.font = "30px Arial";
+        ctx.fillText("Score: " + this.score, 10, 30);
     }
 }

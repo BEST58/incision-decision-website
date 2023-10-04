@@ -145,5 +145,6 @@ class Board {
         }
 
         ctx.stroke();
+
     }
 }

@@ -16,19 +16,10 @@ class Pellet {
 
     }
 
-    getBoundary() {
+    getCenter() {
 
-     const boundary = {
-            tl: {
-                x: 40,
-                y: this.y - this.radius 
-            },
-            br: {
-                x: this.x + this.radius,
-                y: this.y + this.radius
-             }
-        }
-        return boundary
+      return [this.x,this.y]
+      
     }
 
     draw(ctx) {
