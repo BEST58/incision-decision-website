@@ -2,12 +2,13 @@ class Ghost {
     static width = 24;
     static height = 24;
 
-    constructor({ position, image }) {
+    constructor({ position, image, velocity }) {
         this.position = position;
         this.width = Ghost.width;
         this.height = Ghost.height;
-        this.velocity = { x: 0, y: 0 };
+        this.velocity = velocity || { x: 5, y: 0 };
         this.image = image;
+        this.prevCollisions = [];
     }
 
     calc() {

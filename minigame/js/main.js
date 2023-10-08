@@ -1,5 +1,5 @@
 const pressStart2PFont = new FontFace('pressStart2P', 'url(https://fonts.gstatic.com/s/pressstart2p/v15/e3t4euO8T-267oIAQAu6jDQyK3nVivM.woff2)');
-pressStart2PFont.load().then(function(font){
+pressStart2PFont.load().then(function (font) {
   document.fonts.add(font);
   console.log("Font Loaded!");
 });
@@ -37,7 +37,7 @@ const map = [
 ]
 
 const boundaries = [],
-      pellets = [];
+  pellets = [];
 for (let row = 0; row < map.length; row++) {
   for (let col = 0; col < map[row].length; col++) {
     const value = map[row][col];
@@ -74,11 +74,13 @@ const pacman = new Pacman({
 });
 
 const ghosts = {
-  Blinky: new Ghost({ 
+  Blinky: new Ghost({
     position: {
-      x: startingX + Boundary.width * parseInt((map[parseInt(map.length / 2)].length + 1)/ 2) + 3,
+      x: startingX + Boundary.width * parseInt((map[parseInt(map.length / 2)].length + 1) / 2) + 3,
       y: startingY + Boundary.height * map.length / 2 + Boundary.height / 2 + 3,
-    }, image: getImg("images/blinky.png")
+    },
+    image: getImg("images/blinky.png"),
+    velocity: { x: 5, y: 0 }
   })
 }
 
@@ -89,12 +91,24 @@ function doesCircleIntersectRectangle({
   return (
     circle.position.y - circle.radius + circle.velocity.y <= rectangle.position.y + rectangle.height &&
     circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x &&
-    circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y && 
+    circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y &&
     circle.position.x - circle.radius + circle.velocity.x <= rectangle.position.x + rectangle.width
   )
 };
 
-function willIntersect(circle, velocity) {
+function doesRectangleIntersectRectangle({
+  rec1,
+  rec2
+}) {
+  return (
+    rec1.position.y + rec1.velocity.y <= rec2.position.y + rec2.height &&
+    rec1.position.x + rec1.width + rec1.velocity.x >= rec2.position.x &&
+    rec1.position.y + rec1.height + rec1.velocity.y >= rec2.position.y &&
+    rec1.position.x + rec1.velocity.x <= rec2.position.x + rec2.width
+  )
+};
+
+function willIntersectCircle(circle, velocity) {
   var willIntersect = false;
   for (let i = 0; i < boundaries.length; i++) {
     const boundary = boundaries[i];
@@ -104,6 +118,25 @@ function willIntersect(circle, velocity) {
         rectangle: boundary
       })
     ) {
+      willIntersect = true;
+      break;
+    }
+  };
+  return willIntersect;
+}
+
+function willIntersectRectangle(rectangle, velocity) {
+  const rec1 = { ...rectangle, velocity };
+  var willIntersect = false;
+  for (let i = 0; i < boundaries.length; i++) {
+    const boundary = boundaries[i];
+    if (
+      doesRectangleIntersectRectangle({
+        rec1: rec1,
+        rec2: boundary
+      })
+    ) {
+      // console.log("Intersects", velocity)
       willIntersect = true;
       break;
     }
@@ -129,25 +162,25 @@ function animate() {
     ctx.reset();
 
     if (keysPressed.w && lastKey === 'w') {
-      if (willIntersect(pacman, { x: 0, y: -3 })) {
+      if (willIntersectCircle(pacman, { x: 0, y: -3 })) {
         pacman.velocity.y = 0;
       } else {
         pacman.velocity.y = -3;
       }
     } else if (keysPressed.s && lastKey === 's') {
-      if (willIntersect(pacman, { x: 0, y: 3 })) {
+      if (willIntersectCircle(pacman, { x: 0, y: 3 })) {
         pacman.velocity.y = 0;
       } else {
         pacman.velocity.y = 3;
       }
     } else if (keysPressed.a && lastKey === 'a') {
-      if (willIntersect(pacman, { x: -3, y: 0 })) {
+      if (willIntersectCircle(pacman, { x: -3, y: 0 })) {
         pacman.velocity.x = 0;
       } else {
         pacman.velocity.x = -3;
       }
     } else if (keysPressed.d && lastKey === 'd') {
-      if (willIntersect(pacman, { x: 3, y: 0 })) {
+      if (willIntersectCircle(pacman, { x: 3, y: 0 })) {
         pacman.velocity.x = 0;
       } else {
         pacman.velocity.x = 3;
@@ -170,7 +203,7 @@ function animate() {
       if (Math.hypot(
         pellet.position.x - pacman.position.x,
         pellet.position.y - pacman.position.y
-        ) < pellet.radius + pacman.radius 
+      ) < pellet.radius + pacman.radius
       ) {
         score += 10;
         pellets.splice(i, 1);
@@ -180,35 +213,39 @@ function animate() {
     pacman.calc();
     Object.values(ghosts).forEach(ghost => {
       const velocities = {
-        left: { x: -5, y: 0 },
-        right: { x: 5, y: 0 },
-        down: { x: 0, y: 5 },
-        up: { x: 0, y: -5 }
+        left: { x: -3, y: 0 },
+        right: { x: 3, y: 0 },
+        down: { x: 0, y: 3 },
+        up: { x: 0, y: -3 }
       }
 
-      const options = {
-        left: willIntersect(ghost, { x: -5, y: 0 }),
-        right: willIntersect(ghost, { x: 5, y: 0 }),
-        down: willIntersect(ghost, { x: 0, y: 5 }),
-        up: willIntersect(ghost, { x: 0, y: -5 })
-      };
+      const collisions = [];
 
-      const optKeys = Object.keys(options);
+      for (let i = 0; i < Object.keys(velocities).length; i++) {
+        const key = Object.keys(velocities)[i];
+        const willIntersect = willIntersectRectangle(ghost, velocities[key]);
+        // console.log(willIntersect, key)
+        if (willIntersect) collisions.push(key);
+      }
 
-      const numOfOptions = Object.values(options).filter(a => a).length;
-      if (numOfOptions > 0) {
-        const num = parseInt(Math.random() * (numOfOptions - 0.0001));
-        var counter = 0;
-        for (let i = 0; i < optKeys.length; i++) {
-          const key = optKeys[i];
-          if (options[key]) {
-            if (num === counter) {
-              ghost.velocity = velocities[key];
-              break;
-            }
-            counter += 1;
-          }
-        }
+      if (collisions.length > ghost.prevCollisions.length) {
+        ghost.prevCollisions = collisions;
+      }
+
+      const sameOptionsAsLast = JSON.stringify(ghost.prevCollisions) === JSON.stringify(collisions);
+      if (!sameOptionsAsLast) {
+        if (ghost.velocity.x > 0) ghost.prevCollisions.push('right');
+        else if (ghost.velocity.x < 0) ghost.prevCollisions.push('left');
+        else if (ghost.velocity.y > 0) ghost.prevCollisions.push('down');
+        else if (ghost.velocity.y < 0) ghost.prevCollisions.push('up');
+
+        const options = ghost.prevCollisions.filter(option => !collisions.includes(option));
+
+        const randomOption = options[Math.floor(Math.random() * options.length)];
+        console.log(ghost.prevCollisions, collisions, randomOption)
+        
+        ghost.velocity = velocities[randomOption];
+        ghost.prevCollisions = [];
       }
 
       ghost.calc();
@@ -219,7 +256,7 @@ function animate() {
     pacman.draw();
 
     Object.values(ghosts).forEach(ghost => ghost.draw());
-    
+
     ctx.font = "40px pressStart2P";
     ctx.fillStyle = "white";
     ctx.fillText(`SCORE: ${score}`, 10, 45);
