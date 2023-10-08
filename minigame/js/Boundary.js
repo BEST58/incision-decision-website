@@ -1,6 +1,6 @@
 class Boundary {
-    static width = 40;
-    static height = 40;
+    static width = 30;
+    static height = 30;
 
     constructor ({ position, image }) {
         this.position = position;

@@ -1,5 +1,5 @@
 class Pacman {
-    static radius = 15;
+    static radius = 12;
 
     constructor ({ position, velocity }) {
         this.position = position;

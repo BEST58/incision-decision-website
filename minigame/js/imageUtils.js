@@ -44,12 +44,101 @@ function findImage(row, col) {
   }
 
   if (
+    map[row] && map[row][col - 1] === '-' &&
+    map[row][col + 1] === '-' &&
+    map[row - 1] && map[row - 1][col] === '-' &&
+    map[row + 1] && map[row + 1][col] === '-'
+  ) {
+    return images.pipeCross;
+  }
+
+  if (
+    (!map[row - 1] || map[row - 1][col] === ' ') &&
+    (map[row + 1] && map[row + 1][col] === '-')
+  ) {
+    if (
+      map[row][col - 1] === '-' &&
+      map[row][col + 1] !== '-') {
+      return images.pipeCornerTopRight;
+    } else if (
+    map[row][col - 1] !== '-' &&
+    map[row][col + 1] === '-') {
+      return images.pipeCornerTopLeft;
+    } else if (
+      map[row][col - 1] !== '-' &&
+      map[row][col + 1] !== '-') {
+      return images.capTop;
+    } else if (
+      map[row][col - 1] === '-' &&
+      map[row][col + 1] === '-') {
+      return images.pipeConnectorTop;
+    }
+
+    return images.pipeVertical;
+  }
+
+  if (
+    (map[row - 1] && map[row - 1][col] === '-') &&
+    (!map[row + 1] || map[row + 1][col] === ' ')
+  ) {
+    if (
+      map[row][col - 1] === '-' &&
+      map[row][col + 1] !== '-') {
+      return images.pipeCornerBottomRight;
+    } else if (
+      map[row][col - 1] !== '-' &&
+      map[row][col + 1] === '-') {
+      return images.pipeCornerBottomLeft;
+    } else if (
+      map[row][col - 1] !== '-' &&
+      map[row][col + 1] !== '-') {
+      return images.capBottom;
+    } else if (
+      map[row][col - 1] === '-' &&
+      map[row][col + 1] === '-') {
+      return images.pipeConnectorBottom;
+    }
+
+    return images.pipeVertical;
+  }
+
+  if (
     map[row][col - 1] !== '-' &&
     map[row][col + 1] !== '-' &&
     map[row - 1] && map[row - 1][col] === '-' &&
     map[row + 1] && map[row + 1][col] === '-'
   ) {
     return images.pipeVertical;
+  }
+
+  if (
+    (map[row][col - 1] !== '-') &&
+    (map[row][col + 1] === '-')
+  ) {
+    if (
+      (!map[row - 1] || map[row - 1][col] === ' ') &&
+      (!map[row + 1] || map[row + 1][col] === ' ')) {
+      return images.capLeft;
+    } else if (
+      (map[row - 1] && map[row - 1][col] !== ' ') &&
+      (map[row + 1] && map[row + 1][col] !== ' ')) {
+      return images.pipeConnectorRight;
+    }
+
+    return images.pipeHorizontal;
+  }
+
+  if (
+    (map[row][col - 1] === '-') &&
+    (map[row][col + 1] !== '-')
+  ) {
+    if (
+      (!map[row - 1] || map[row - 1][col] === ' ') &&
+      (!map[row + 1] || map[row + 1][col] === ' ')) {
+      return images.capRight;
+    }
+
+    return images.pipeHorizontal;
   }
 
   if (
