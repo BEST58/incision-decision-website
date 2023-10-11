@@ -22,9 +22,6 @@ body {
     position: relative;
 }
 
-.sticky{
-    width: 98.75vw;
-}
 nav {
     overflow-x: hidden;
     width: 100vw;
