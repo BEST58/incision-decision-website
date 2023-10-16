@@ -281,7 +281,10 @@ document.addEventListener("DOMContentLoaded", function () {
   startAnimating(30);
 });
 
-document.addEventListener('keydown', ({ key }) => {
+document.addEventListener('keydown', (e) => {
+  const key = e.key;
+  if (key.includes("Arrow")) e.preventDefault();
+
   switch (key) {
     case 'w':
     case 'ArrowUp':
@@ -309,24 +312,3 @@ document.addEventListener('keydown', ({ key }) => {
       break;
   }
 });
-
-// document.addEventListener('keyup', ({ key }) => {
-//   switch (key) {
-//     case 'w':
-//     case 'ArrowUp':
-//       keysPressed.w = false;
-//       break;
-//     case 's':
-//     case 'ArrowDown':
-//       keysPressed.s = false;
-//       break;
-//     case 'a':
-//     case 'ArrowLeft':
-//       keysPressed.a = false;
-//       break;
-//     case 'd':
-//     case 'ArrowRight':
-//       keysPressed.d = false;
-//       break;
-//   }
-// });
