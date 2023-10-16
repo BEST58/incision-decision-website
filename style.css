@@ -18,7 +18,7 @@ main {
 
 body {
     background-color: #FFFFFF;
-    font-family: 'Twentieth Century Condensed', sans-serif;
+    font-family: 'Roboto', sans-serif;
     position: relative;
 }
 
@@ -80,6 +80,11 @@ nav #headerLogo {
     max-width: 150px;
 }
 
+header *,
+main * {
+    scroll-margin-top: 150px;
+}
+
 header {
     display: flex;
     padding-bottom: 10rem;
@@ -95,10 +100,30 @@ header {
 header>div {
     flex: 2;
 }
-.callToAction{
-    text-align: center;
-    padding-left: 7rem;
+
+header {
+    font-weight: 400;
 }
+
+header p {
+    font-size: 1.25rem;
+}
+
+.callToAction{
+    text-align: left;
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.callToAction b {
+    font-weight: 500;
+}
+
+header div.left > div {
+    width: 50%;
+    margin: 0 auto;
+}
+
 header>div.right {
     flex: 2;
     display: flex;
@@ -110,6 +135,7 @@ header>div.right {
 header h1,
 header h2 {
     text-align: center;
+    font-weight: 500;
 }
 
 header img {
@@ -134,13 +160,47 @@ main.sponsors > div.right {
 }
 
 main h1,
-main h2 {
+main h2,
+main h3 {
     text-align: center;
+    font-weight: 500;
+}
+
+main h2 {
+    font-size: 2.5rem;
+}
+
+main h3 {
+    font-size: 2rem;
+}
+
+main section {
+    padding-left: 5vw;
+    padding-right: 5vw;
+    margin-bottom: 8vh;
+}
+
+main section p {
+    font-size: 1.25rem;
+    font-weight: 300;
 }
 
 main img {
-    width: 75%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 75%;
+}
+
+main.home p {
+    text-align: center;
+}
+
+main.home img {
+    width: 50%;
+    max-width: 300px;
+}
+
+header img {
+    width: 75%;
 }
 
 .sponsor {
