@@ -24,7 +24,7 @@ body {
 
 nav {
     overflow-x: hidden;
-    width: 100vw;
+    width: 98.75vw;
     background: linear-gradient(var(--accent-text-color) 5%,
             var(--main-bg-color) 75%);
     color: var(--text-color);
