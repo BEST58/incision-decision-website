@@ -7,7 +7,16 @@ class Pacman {
         this.radius = Pacman.radius;
     }
 
-    calc () {
+    calc (startingX, endingX) {
+        // if teleport
+        if (this.velocity.x < 0)
+            if (Math.abs(this.position.x - startingX) < 10)
+                console.log("teleport left")
+
+        if (this.velocity.x > 0)
+            if (Math.abs(this.position.x - endingX) < 10)
+                console.log("teleport right")
+
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
     }
