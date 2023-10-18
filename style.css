@@ -24,7 +24,7 @@ body {
 
 nav {
     overflow-x: hidden;
-    width: 100vw;
+    width: 98.75vw;
     background: linear-gradient(var(--accent-text-color) 5%,
             var(--main-bg-color) 75%);
     color: var(--text-color);
@@ -38,7 +38,7 @@ nav {
 nav>ul {
     width: 100%;
     margin: 0;
-    padding-left: 1rem;
+    padding-left: 0.75rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     display: flex;
@@ -55,6 +55,7 @@ nav a {
     color: var(--text-color);
     font-size: 1.75rem;
     text-decoration: none;
+    width: fit-content;
 }
 .navList{
     flex: 1;
@@ -63,14 +64,14 @@ nav a {
     text-align: center;
 }
 .navLogo {
-    flex: 2;
+    flex: 1.5;
     justify-content: center;
     text-align: center;
     display: flex;
     align-items: center;
 }
 .logoText {
-    padding-left: 5%;
+    padding-left: 2.6%;
     font-size: 4rem;
     transition: 0.2s;
 }
@@ -229,4 +230,11 @@ header img {
 
 .subheader {
     text-align: center;
+}
+
+.mainRecruit{
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1rem;
+    font-size: 1.2rem;
 }
