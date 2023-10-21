@@ -76,10 +76,18 @@ const pacman = new Pacman({
 const ghosts = {
   Blinky: new Ghost({
     position: {
-      x: startingX + Boundary.width * parseInt((map[parseInt(map.length / 2)].length + 1) / 2) + 3,
+      x: startingX + Boundary.width * map.length / 2 + Boundary.height / 2 + 3,
       y: startingY + Boundary.height * map.length / 2 + Boundary.height / 2 + 3,
     },
     image: getImg("images/blinky.png"),
+    velocity: { x: 5, y: 0 }
+  }),
+  Pinky: new Ghost({
+    position: {
+      x: startingX + Boundary.width * map.length / 2 + Boundary.height / 2 + 3,
+      y: startingY + Boundary.height * map.length / 2 + Boundary.height / 2 + 3,
+    },
+    image: getImg("images/pinky.png"),
     velocity: { x: 5, y: 0 }
   })
 }
@@ -158,109 +166,112 @@ function animate() {
   elapsed = now - then;
 
   // if enough time has elapsed, draw the next frame
-  if (elapsed > fpsInterval) {
-    ctx.reset();
+  if (!(elapsed > fpsInterval)) return;
 
-    if (keysPressed.w && lastKey === 'w') {
-      if (willIntersectCircle(pacman, { x: 0, y: -3 })) {
-        pacman.velocity.y = 0;
-      } else {
-        pacman.velocity.y = -3;
-      }
-    } else if (keysPressed.s && lastKey === 's') {
-      if (willIntersectCircle(pacman, { x: 0, y: 3 })) {
-        pacman.velocity.y = 0;
-      } else {
-        pacman.velocity.y = 3;
-      }
-    } else if (keysPressed.a && lastKey === 'a') {
-      if (willIntersectCircle(pacman, { x: -3, y: 0 })) {
-        pacman.velocity.x = 0;
-      } else {
-        pacman.velocity.x = -3;
-      }
-    } else if (keysPressed.d && lastKey === 'd') {
-      if (willIntersectCircle(pacman, { x: 3, y: 0 })) {
-        pacman.velocity.x = 0;
-      } else {
-        pacman.velocity.x = 3;
-      }
+  ctx.reset();
+
+  if (keysPressed.w && lastKey === 'w') {
+    if (willIntersectCircle(pacman, { x: 0, y: -3 })) {
+      pacman.velocity.y = 0;
+    } else {
+      pacman.velocity.y = -3;
+    }
+  } else if (keysPressed.s && lastKey === 's') {
+    if (willIntersectCircle(pacman, { x: 0, y: 3 })) {
+      pacman.velocity.y = 0;
+    } else {
+      pacman.velocity.y = 3;
+    }
+  } else if (keysPressed.a && lastKey === 'a') {
+    if (willIntersectCircle(pacman, { x: -3, y: 0 })) {
+      pacman.velocity.x = 0;
+    } else {
+      pacman.velocity.x = -3;
+    }
+  } else if (keysPressed.d && lastKey === 'd') {
+    if (willIntersectCircle(pacman, { x: 3, y: 0 })) {
+      pacman.velocity.x = 0;
+    } else {
+      pacman.velocity.x = 3;
+    }
+  }
+
+  boundaries.forEach(boundary => {
+    if (
+      doesCircleIntersectRectangle({
+        circle: pacman,
+        rectangle: boundary
+      })
+    ) {
+      pacman.velocity.x = 0;
+      pacman.velocity.y = 0;
+    }
+  });
+
+  pellets.forEach((pellet, i) => {
+    if (Math.hypot(
+      pellet.position.x - pacman.position.x,
+      pellet.position.y - pacman.position.y
+    ) < pellet.radius + pacman.radius
+    ) {
+      score += 10;
+      pellets.splice(i, 1);
+    }
+  });
+
+  pacman.calc();
+  Object.values(ghosts).forEach(ghost => {
+    const velocities = {
+      left: { x: -3, y: 0 },
+      right: { x: 3, y: 0 },
+      down: { x: 0, y: 3 },
+      up: { x: 0, y: -3 }
     }
 
-    boundaries.forEach(boundary => {
-      if (
-        doesCircleIntersectRectangle({
-          circle: pacman,
-          rectangle: boundary
-        })
-      ) {
-        pacman.velocity.x = 0;
-        pacman.velocity.y = 0;
-      }
-    });
+    const collisions = [];
 
-    pellets.forEach((pellet, i) => {
-      if (Math.hypot(
-        pellet.position.x - pacman.position.x,
-        pellet.position.y - pacman.position.y
-      ) < pellet.radius + pacman.radius
-      ) {
-        score += 10;
-        pellets.splice(i, 1);
-      }
-    });
+    for (let i = 0; i < Object.keys(velocities).length; i++) {
+      const key = Object.keys(velocities)[i];
+      const willIntersect = willIntersectRectangle(ghost, velocities[key]);
+      // console.log(willIntersect, key)
+      if (willIntersect) collisions.push(key);
+    }
 
-    pacman.calc();
-    Object.values(ghosts).forEach(ghost => {
-      const velocities = {
-        left: { x: -3, y: 0 },
-        right: { x: 3, y: 0 },
-        down: { x: 0, y: 3 },
-        up: { x: 0, y: -3 }
-      }
+    if (collisions.length > ghost.prevCollisions.length) {
+      ghost.prevCollisions = collisions;
+    }
 
-      const collisions = [];
+    const sameOptionsAsLast = JSON.stringify(ghost.prevCollisions) === JSON.stringify(collisions);
+    if (!sameOptionsAsLast) {
+      if (ghost.velocity.x > 0) ghost.prevCollisions.push('right');
+      else if (ghost.velocity.x < 0) ghost.prevCollisions.push('left');
+      else if (ghost.velocity.y > 0) ghost.prevCollisions.push('down');
+      else if (ghost.velocity.y < 0) ghost.prevCollisions.push('up');
 
-      for (let i = 0; i < Object.keys(velocities).length; i++) {
-        const key = Object.keys(velocities)[i];
-        const willIntersect = willIntersectRectangle(ghost, velocities[key]);
-        // console.log(willIntersect, key)
-        if (willIntersect) collisions.push(key);
-      }
+      const options = ghost.prevCollisions.filter(option => !collisions.includes(option));
 
-      if (collisions.length > ghost.prevCollisions.length) {
-        ghost.prevCollisions = collisions;
-      }
-
-      const sameOptionsAsLast = JSON.stringify(ghost.prevCollisions) === JSON.stringify(collisions);
-      if (!sameOptionsAsLast) {
-        if (ghost.velocity.x > 0) ghost.prevCollisions.push('right');
-        else if (ghost.velocity.x < 0) ghost.prevCollisions.push('left');
-        else if (ghost.velocity.y > 0) ghost.prevCollisions.push('down');
-        else if (ghost.velocity.y < 0) ghost.prevCollisions.push('up');
-
-        const options = ghost.prevCollisions.filter(option => !collisions.includes(option));
-
-        const randomOption = options[Math.floor(Math.random() * options.length)];
-        console.log(ghost.prevCollisions, collisions, randomOption)
-        
-        ghost.velocity = velocities[randomOption];
-        ghost.prevCollisions = [];
-      }
-
+      //const randomOption = options[Math.floor(Math.random() * options.length)];
+      //console.log(ghost.prevCollisions, collisions, randomOption)
+      
+      //ghost.velocity = velocities[randomOption];
+      ghost.prevCollisions = [];
+      ghost.updatePosition(options, pacman.position);
+    } else {
       ghost.calc();
-    });
+    }
 
-    boundaries.forEach(a => a.draw());
-    pellets.forEach(a => a.draw());
-    pacman.draw();
+    
+  });
 
-    Object.values(ghosts).forEach(ghost => ghost.draw());
+  boundaries.forEach(a => a.draw());
+  pellets.forEach(a => a.draw());
+  pacman.draw();
 
-    ctx.font = "40px pressStart2P";
-    ctx.fillStyle = "white";
-    ctx.fillText(`SCORE: ${score}`, 10, 45);
-  }
+  Object.values(ghosts).forEach(ghost => ghost.draw());
+
+  ctx.font = "40px pressStart2P";
+  ctx.fillStyle = "white";
+  ctx.fillText(`SCORE: ${score}`, 10, 45);
 }
 
 function startAnimating(fps) {
