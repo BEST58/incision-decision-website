@@ -1,37 +1,18 @@
 class Pellet {
-    constructor(x, y, radius) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
+    static radius = 3;
 
-        this.tl = {
-            x: this.x - this.radius,
-            y: this.y - this.radius
-        }
-
-        this.br = {
-            x: this.x + this.radius,
-            y: this.y + this.radius
-        }
-
+    constructor({ position }) {
+        this.position = position;
+        this.radius = Pellet.radius;
     }
 
-    getCenter() {
-
-      return [this.x,this.y]
-      
-    }
-
-    draw(ctx) {
-        ctx.strokeStyle = 'yellow';
-        ctx.fillStyle = 'yellow';
-        ctx.lineWidth = 3;
-
+    draw() {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI * 2, false);
+        ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
         ctx.closePath();
+        
+        ctx.fillStyle = "white";
         ctx.fill();
-        ctx.stroke();
     }
 
 }

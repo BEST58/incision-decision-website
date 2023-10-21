@@ -1,146 +1,76 @@
-//Making something that should happen when pacman touches the ghost, not to be used or at least not now as this is just to give me an idea of what to do and make any improvements.
-
-/*
-
-var allGhosts = document.querySelectorAll('Ghost, GhostTwo, GhostThree, GhostFour');
-
-var gameEnd = False;
-
-if Ghost(X, Y) || GhostTwo(X, Y) || GhostThree(X, Y) || GhostFour(X, Y) == Pacman(X, Y) {
-  return gameEnd;
-}
-
-//Trying to calculate pos for ghost as Brett said using what's similar for pacman. Will figure this out later and get basics done first
-
-  calcIntersect(bounds){
-     //   console.log(bounds[1][0])
-     let spacing = 5
-        for(let i = 0; i < bounds.length; i++){
-            if(this.velocity.x > 0){
-                if(this.x + this.radius + spacing == bounds[i][0][0] && ((this.y > bounds[i][0][1] && this.y < bounds[i][1][1]) || (this.y < bounds[i][0][1] && this.y > bounds[i][1][1]))){
-                    this.velocity.x = 0
-                }
-            }
-            if(this.velocity.x < 0){
-                if(this.x - this.radius - spacing == bounds[i][0][0] && ((this.y > bounds[i][0][1] && this.y < bounds[i][1][1]) || (this.y < bounds[i][0][1] && this.y > bounds[i][1][1]))){
-                    this.velocity.x = 0
-                }
-            }
-            if(this.velocity.y > 0){
-                if(this.y + this.radius + spacing == bounds[i][0][1] && ((this.x > bounds[i][0][0] && this.x < bounds[i][1][0]) || (this.x < bounds[i][0][0] && this.x > bounds[i][1][0]))){
-                    this.velocity.y = 0
-                }
-            }
-            if(this.velocity.y < 0){
-                if(this.y - this.radius - spacing == bounds[i][0][1] && ((this.x > bounds[i][0][0] && this.x < bounds[i][1][0]) || (this.x < bounds[i][0][0] && this.x > bounds[i][1][0]))){
-                    this.velocity.y = 0
-                }
-            }
-        }
-        
-    }
-*/
-
 class Ghost {
-  constructor(radius, startingX, startingY) {
-        this.radius = 10;
-        this.x = 27;
-        this.y = 57;
-      }
+    static width = 24;
+    static height = 24;
 
-    draw(ctx) {
-        ctx.strokeStyle = 'red';
-        ctx.fillStyle = 'red';
-        ctx.lineWidth = 3;
-        
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI / 6, Math.PI, false);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI, Math.PI * 11 / 6, false);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
+    constructor({ position, image, velocity, smartAlgo }) {
+        this.position = position;
+        this.width = Ghost.width;
+        this.height = Ghost.height;
+        this.velocity = velocity || { x: 3, y: 0 };
+        this.image = image;
+        this.smartAlgo = smartAlgo || false;
+        this.prevCollisions = [];
     }
+
+    calc(pacmanPosition) {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+
+        if (doesCircleIntersectRectangle({ circle: { position: pacmanPosition, velocity: { x: 0, y: 0 }, radius: Pacman.radius - 4 },  rectangle: this})) {
+            doStop = true;
+            console.log("killed");
+        }
+        if (this.velocity.x < 0)
+            if (Math.abs(this.position.x - startingX) < 10)
+                this.position.x = endingX;
+
+        if (this.velocity.x > 0)
+            if (Math.abs(this.position.x - endingX) < 10)
+                this.position.x = startingX;
+    }
+    
+
+    updatePosition(options, pacmanPosition) {
+        const dx = pacmanPosition.x - this.position.x;
+        const dy = pacmanPosition.y - this.position.y;
+
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        const dirX = dx / distance;
+        const dirY = dy / distance;
+        
+        if (this.smartAlgo && Math.abs(dirX) > Math.abs(dirY) && dirX < 0 && options.includes('left')){
+            this.velocity = { x: -3, y: 0 };
+        }
+        else if (this.smartAlgo && Math.abs(dirX) > Math.abs(dirY) && dirX > 0 && options.includes('right')){
+            this.velocity = { x: 3, y: 0 };
+        }
+        else if (this.smartAlgo && Math.abs(dirX) < Math.abs(dirY) && dirY < 0 && options.includes('up')){
+            this.velocity = { x: 0, y: -3 };
+        }else if (this.smartAlgo && Math.abs(dirX) < Math.abs(dirY) && dirY > 0 && options.includes('down')){
+            this.velocity = { x: 0, y: 3 };
+        }
+        else {
+            const velocities = {
+                left: { x: -3, y: 0 },
+                right: { x: 3, y: 0 },
+                down: { x: 0, y: 3 },
+                up: { x: 0, y: -3 }
+            }
+
+            const randomOption = options[Math.floor(Math.random() * options.length)];      
+            this.velocity = velocities[randomOption];
+        }
+
+        this.calc(pacmanPosition);
+    }
+
+    draw() {
+        ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
+    }
+
 }
 
-class GhostTwo {
-  constructor(radius, startingX, startingY) {
-        this.radius = 10;
-        this.x = 27;
-        this.y = 57;
-      }
 
-    draw(ctx) {
-        ctx.strokeStyle = 'yellow';
-        ctx.fillStyle = 'yellow';
-        ctx.lineWidth = 3;
-        
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI / 6, Math.PI, false);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
 
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI, Math.PI * 11 / 6, false);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-    }
-}
 
-class GhostThree {
-  constructor(radius, startingX, startingY) {
-        this.radius = 10;
-        this.x = 27;
-        this.y = 57;
-      }
-
-    draw(ctx) {
-        ctx.strokeStyle = 'blue';
-        ctx.fillStyle = 'blue';
-        ctx.lineWidth = 3;
-        
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI / 6, Math.PI, false);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI, Math.PI * 11 / 6, false);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-    }
-}
-
-class GhostFour {
-  constructor(radius, startingX, startingY) {
-        this.radius = 10;
-        this.x = 27;
-        this.y = 57;
-      }
-
-    draw(ctx) {
-        ctx.strokeStyle = 'cyan';
-        ctx.fillStyle = 'cyan';
-        ctx.lineWidth = 3;
-        
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI / 6, Math.PI, false);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, Math.PI, Math.PI * 11 / 6, false);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-    }
-}

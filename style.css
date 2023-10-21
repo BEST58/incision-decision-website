@@ -18,16 +18,12 @@ main {
 
 body {
     background-color: #FFFFFF;
-    font-family: 'Twentieth Century Condensed', sans-serif;
+    font-family: 'Roboto', sans-serif;
     position: relative;
 }
 
-.sticky{
-    width: 98.75vw;
-}
 nav {
     overflow-x: hidden;
-    width: 100vw;
     background: linear-gradient(var(--accent-text-color) 5%,
             var(--main-bg-color) 75%);
     color: var(--text-color);
@@ -39,9 +35,8 @@ nav {
 }
 
 nav>ul {
-    width: 100%;
     margin: 0;
-    padding-left: 1rem;
+    padding-left: 0.75rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     display: flex;
@@ -50,14 +45,75 @@ nav>ul {
     flex-direction: row;
 }
 
-nav li {
-    display: inline;
+@media only screen and (max-width: 1000px) {
+    nav > ul {
+        display: block !important;
+        padding-right: 0.75rem;
+        position: relative;
+    }
+
+    nav > ul > .navLogo > button {
+        z-index: 1000;
+        position: absolute;
+        top: 50%;
+        left: 2rem;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: white;
+        border: none;
+        border-radius: 1rem;
+        text-align: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.35) 2px 2px 5px;
+    }
+
+    nav > ul > .navLogo > button:hover {
+        background-color: rgb(230, 230, 230);
+    }
+
+    nav.active li:not(.navLogo) {
+        display: block !important;
+    }
+
+    nav li {
+        display: none;
+        width: 100% !important;
+        line-height: 2;
+        outline: 1px solid;
+        margin-top: 1px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    nav .navLogo {
+        display: flex;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        position: relative;
+    }
+
+    nav a {
+        width: 100% !important;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    nav li {
+        display: inline;
+    }   
+
+    nav > ul > .navLogo > button {
+        display: none !important;
+    }
 }
 
 nav a {
     color: var(--text-color);
     font-size: 1.75rem;
     text-decoration: none;
+    width: fit-content;
 }
 .navList{
     flex: 1;
@@ -66,21 +122,26 @@ nav a {
     text-align: center;
 }
 .navLogo {
-    flex: 2;
+    flex: 1.5;
     justify-content: center;
     text-align: center;
     display: flex;
     align-items: center;
 }
 .logoText {
-    padding-left: 5%;
-    font-size: 4rem;
+    padding-left: 2.6%;
+    font-size: 2rem;
     transition: 0.2s;
 }
 nav #headerLogo {
     transition: 0.2s;
-    width:50%;
-    max-width: 150px;
+    width: 150px;
+    height: 150px;
+}
+
+header *,
+main * {
+    scroll-margin-top: 150px;
 }
 
 header {
@@ -98,10 +159,30 @@ header {
 header>div {
     flex: 2;
 }
-.callToAction{
-    text-align: center;
-    padding-left: 7rem;
+
+header {
+    font-weight: 400;
 }
+
+header p {
+    font-size: 1.25rem;
+}
+
+.callToAction{
+    text-align: left;
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.callToAction b {
+    font-weight: 500;
+}
+
+header div.left > div {
+    width: 50%;
+    margin: 0 auto;
+}
+
 header>div.right {
     flex: 2;
     display: flex;
@@ -113,6 +194,7 @@ header>div.right {
 header h1,
 header h2 {
     text-align: center;
+    font-weight: 500;
 }
 
 header img {
@@ -137,13 +219,47 @@ main.sponsors > div.right {
 }
 
 main h1,
-main h2 {
+main h2,
+main h3 {
     text-align: center;
+    font-weight: 500;
+}
+
+main h2 {
+    font-size: 2.5rem;
+}
+
+main h3 {
+    font-size: 2rem;
+}
+
+main section {
+    padding-left: 5vw;
+    padding-right: 5vw;
+    margin-bottom: 8vh;
+}
+
+main section p {
+    font-size: 1.25rem;
+    font-weight: 300;
 }
 
 main img {
-    width: 75%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 75%;
+}
+
+main.home p {
+    text-align: center;
+}
+
+main.home img {
+    width: 50%;
+    max-width: 300px;
+}
+
+header img {
+    width: 75%;
 }
 
 .sponsor {
@@ -172,4 +288,11 @@ main img {
 
 .subheader {
     text-align: center;
+}
+
+.mainRecruit{
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1rem;
+    font-size: 1.2rem;
 }

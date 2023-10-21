@@ -5,9 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link href="https://fonts.cdnfonts.com/css/twentieth-century-condensed" rel="stylesheet">    
+    <link href="https://fonts.cdnfonts.com/css/twentieth-century-condensed" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="waves.css">
+    
 
     <script src="./common.js" defer async></script>
 
@@ -19,11 +24,17 @@
     -->
     <nav class="sticky">
         <ul>
+            <li class="navLogo">
+                <button>≡</button>
+                <a class="navLogo" href="./">
+                    <img id="headerLogo" src="./images/logo.png" />
+                    <p class="logoText">Eagle Robotics</p>
+                </a>
+            </li>
             <li class="navList"><a href="./robot/">Robot</a></li>
             <li class="navList"><a href="./#aboutus">About Us</a></li>
-            <li class="navLogo"><a class="navLogo" href="../">
-                <img id="headerLogo" src="./FINALEagleRobo23Logo-KL.png"/><p class="logoText">Eagle Robotics</p></a>
-            </li>
+            <li class="navList"><a href="./recruitment/">Recruitment</a></li>
+
             <li class="navList"><a href="./sponsors">Sponsors</a></li>
             <li class="navList"><a href="./minigame/">Minigame</a></li>
         </ul>
@@ -37,39 +48,44 @@
         -->
     </nav>
     <header>
-        <div>
-            <h1 class="callToAction">We will make the cut.</h1>
-            <!-- <p>Our company is committed to creating efficient technology that uses minimally invasive robotic surgery to solve current health issues while maintaining safety as our first priority.</p> -->
+        <div class="left">
+            <div>
+                <h1 class="callToAction">We <b>will make</b> the <b>cut.</b></h1>
+                <p>Our company is committed to creating efficient technology that uses minimally invasive robotic surgery to solve current health issues while maintaining safety as our first priority.</p>
+            </div>
         </div>
         <div class="right">
-            <!-- Todo: replace with image of robot cad -->
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT97dFbGlg3ouRB5qikwS4Ws5Fys4QO5VrsHw&usqp=CAU" />
+            <img src="./images/robot_cad.png" />
         </div>
-            <div class='air air1'></div>
-            <div class='air air2'></div>
-            <div class='air air3'></div>
+        <div class='air air1'></div>
+        <div class='air air2'></div>
+        <div class='air air3'></div>
     </header>
     
-    <main>
+    <main class="home">
         <!--
             Some sections will be 'sticky' so that one piece of media will go with multiple subsections
         -->
         <section id="aboutus">
-            <h1>About Us</h1>
+            <h2>About Us</h2>
             <p>
                 We are BEST team 0058 Eagle Robotics from Allen, Texas. We strive to strengthen our community through STEM and aim to be the leading representative for inclusivity, diversity, and equity in our area. We serve our community in a variety of ways including mentoring rookie teams, hosting community events, and visiting schools. These experiences give our team members opportunities to be leaders and allow them to develop the necessary skills they need for success. 
             </p>
-            <h1>BEST Incision Decision 2023</h1>
+        </section>
+        <section>
+            <img src="images/BEST_Robotics_Logo.jpg" alt="BEST-Logo" />
+            <h2>BEST Robotics</h2>
             <p>
                 The BEST (Boosting Engineering, Science, and Technology) program is a sports-like technology competition that hopes to inspire and motivate students towards studies and careers in engineering, science, and technology. Collin County (CoCo BEST) is one of several hubs throughout the state and nation.
             </p>
+        </section>
+        <section>
+            <img src="images/game_logo.png" alt="Game-Logo" />
+            <h3>2023 Incision Decision</h3>
+            <iframe id="animationVid" src="https://www.youtube.com/embed/HrarNiLwVO4" title="2023 Incision Decision Animation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <p>
-                This year, we will be participating in the BEST Incision Decision Game. This game is has the theme of Robotic Surgery, and it inspires many people in our team interested in being an engineer or being a doctor.
-            </p>
-            <p>
-                We will be particpating in the Collin County BEST Game on October 27-28th at Denton High School. If possible, we will be participating in the State BEST Competition.
-            </p>
-            <p>
+                This game is has the theme of Robotic Surgery, and it inspires many people in our team interested in being an engineer or being a doctor.
+                We will be particpating in the Collin County BEST Game on October 27-28th at Denton High School. If we make it, we will be participating in the Texas State BEST Competition.
                 We are working hard everyday to make the BEST robot ever.
             </p>
         </section>
@@ -81,5 +97,11 @@
             Contact Information / School
         -->
     </footer>
+
+    <script>
+        const w = (window.innerWidth > 1000 ? 1000 : window.innerWidth) - 100;
+        document.getElementById('animationVid').width = w;
+        document.getElementById('animationVid').height = w / 16 * 9;
+    </script>
 </body>
 </html>
