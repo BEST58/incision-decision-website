@@ -296,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
   c.height = window.innerHeight - 4;
   ctx = c.getContext("2d");
 
-  startAnimating(30);
+  startAnimating(60);
 });
 
 document.addEventListener('keydown', (e) => {
