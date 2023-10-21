@@ -2,10 +2,20 @@ const pressStart2PFont = new FontFace('pressStart2P', 'url(https://fonts.gstatic
 pressStart2PFont.load().then(function (font) {
   document.fonts.add(font);
   console.log("Font Loaded!");
+
+  ctx.font = "40px pressStart2P";
+
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.fillText(`PRESS ANY KEY`, c.width / 2, c.height / 2 - 25);
+  ctx.fillText(`TO START`, c.width / 2, c.height / 2 + 25);
+  ctx.textAlign = "left";
 });
 
-var doStop = false;
-var fpsInterval, startTime, now, then, elapsed, ctx;
+var doStop = false, hasStarted = false;
+var fpsInterval, startTime, now, then, elapsed, c, ctx;
 
 var lastKey = null;
 var keysPressed = {
@@ -94,17 +104,17 @@ const ghosts = {
   }),
   Pinky: new Ghost({
     position: {
-      x: endingX - Boundary.width * 2 + 3,
-      y: startingY + Boundary.height * map.length / 2 + 3,
+      x: startingX + Boundary.width * 2 + 3,
+      y: startingY + Boundary.height * (map.length - 2) + 3,
     },
     image: getImg("images/pinky.png"),
-    smartAlgo: true,
+    smartAlgo: false,
     velocity: { x: -3, y: 0 }
   }),
   Inky: new Ghost({
     position: {
       x: endingX - Boundary.width * 3 + 3,
-      y: startingY + Boundary.height + 3
+      y: startingY + Boundary.height * (map.length - 2) + 3
     },
     image: getImg("images/inky.png"),
     smartAlgo: false,
@@ -182,12 +192,6 @@ function willIntersectRectangle(rectangle, velocity) {
 }
 
 function animate() {
-  // stop
-  if (doStop) {
-    ctx.fillText(`GAME OVER`, 225, 375);
-    return;
-  }
-
   // request another frame
   requestAnimationFrame(animate);
 
@@ -199,6 +203,20 @@ function animate() {
   if (!(elapsed > fpsInterval)) return;
 
   then = now;
+
+  // stop
+  if (doStop) {
+    ctx.globalAlpha = 0.05;
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, c.width, c.height);
+    ctx.globalAlpha = 1.0;
+
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center";
+    ctx.fillText(`GAME OVER`, c.width / 2, c.height / 2);
+    ctx.textAlign = "left";
+    return;
+  }
 
   ctx.reset();
 
@@ -312,17 +330,29 @@ function startAnimating(fps) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const c = document.getElementById("myCanvas");
+  c = document.getElementById("myCanvas");
   c.width = window.innerWidth;
-  c.height = window.innerHeight - 4;
+  c.height = window.innerHeight - 8;
   ctx = c.getContext("2d");
+  ctx.font = "40px pressStart2P";
 
-  startAnimating(60);
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.fillText(`PRESS ANY KEY`, c.width / 2, c.height / 2 - 20);
+  ctx.fillText(`TO START`, c.width / 2, c.height / 2 + 20);
+  ctx.textAlign = "left";
 });
 
 document.addEventListener('keydown', (e) => {
   const key = e.key;
   if (key.includes("Arrow")) e.preventDefault();
+
+  if (!hasStarted) {
+    hasStarted = true;
+    startAnimating(60);
+  }
 
   switch (key) {
     case 'w':

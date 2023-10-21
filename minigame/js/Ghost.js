@@ -16,7 +16,7 @@ class Ghost {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
-        if (doesCircleIntersectRectangle({ circle: { position: pacmanPosition, velocity: { x: 0, y: 0 }, radius: Pacman.radius },  rectangle: this})) {
+        if (doesCircleIntersectRectangle({ circle: { position: pacmanPosition, velocity: { x: 0, y: 0 }, radius: Pacman.radius - 4 },  rectangle: this})) {
             doStop = true;
             console.log("killed");
         }
