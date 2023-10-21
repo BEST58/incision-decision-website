@@ -15,7 +15,7 @@ var keysPressed = {
   d: false
 };
 
-const startingX = 50;
+const startingX = 35;
 const startingY = 50;
 
 var score = 0;
@@ -85,19 +85,19 @@ const pacman = new Pacman({
 const ghosts = {
   Blinky: new Ghost({
     position: {
-      x: startingX + Boundary.width * map.length / 2 + Boundary.height / 2 + 3,
-      y: startingY + Boundary.height * map.length / 2 + Boundary.height / 2 + 3,
+      x: endingX - Boundary.width * 2 + 3,
+      y: startingY + Boundary.height + 3
     },
     image: getImg("images/blinky.png"),
-    velocity: { x: 5, y: 0 }
+    velocity: { x: -3, y: 0 }
   }),
   Pinky: new Ghost({
     position: {
-      x: startingX + Boundary.width * map.length / 2 + Boundary.height / 2 + 3,
-      y: startingY + Boundary.height * map.length / 2 + Boundary.height / 2 + 3,
+      x: endingX - Boundary.width * 2 + 3,
+      y: startingY + Boundary.height * map.length / 2 + 3,
     },
     image: getImg("images/pinky.png"),
-    velocity: { x: 5, y: 0 }
+    velocity: { x: -3, y: 0 }
   })
 }
 
@@ -176,6 +176,8 @@ function animate() {
 
   // if enough time has elapsed, draw the next frame
   if (!(elapsed > fpsInterval)) return;
+
+  then = now;
 
   ctx.reset();
 
@@ -259,10 +261,6 @@ function animate() {
 
       const options = ghost.prevCollisions.filter(option => !collisions.includes(option));
 
-      //const randomOption = options[Math.floor(Math.random() * options.length)];
-      //console.log(ghost.prevCollisions, collisions, randomOption)
-      
-      //ghost.velocity = velocities[randomOption];
       ghost.prevCollisions = [];
       ghost.updatePosition(options, pacman.position);
     } else {
