@@ -105,7 +105,7 @@ nav>ul {
     }   
 
     nav > ul > .navLogo > button {
-        display: none;
+        display: none !important;
     }
 }
 
