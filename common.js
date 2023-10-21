@@ -1,7 +1,8 @@
-window.onscroll = function() {scrollFunction()};
 window.addEventListener("load", () => {
-  scrollFunction()
+  scrollFunction();
 });
+
+scrollFunction();
 
 function scrollFunction() {
   
@@ -16,3 +17,11 @@ function scrollFunction() {
     document.getElementsByClassName("logoText")[0].style.fontSize = "2rem";
   }
 }
+
+function toggleMobileNav() {
+  const nav = document.getElementsByTagName('nav')[0];
+  nav.classList.toggle('active');
+}
+
+const navBtn = document.getElementsByTagName('nav')[0].getElementsByTagName('button')[0];
+navBtn.onclick = () => { toggleMobileNav() };
