@@ -3,9 +3,6 @@ import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.126.1/examples/
 import { gsap } from 'https://cdn.skypack.dev/gsap';
 import { ScrollTrigger } from 'https://cdn.skypack.dev/gsap/ScrollTrigger';
 
-const section1 = document.getElementById('text-section-1');
-const section2 = document.getElementById('text-section-2');
-const section3 = document.getElementById('text-section-3');
 const canvas = document.getElementById('canvas');
 
 
