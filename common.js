@@ -25,5 +25,12 @@ function toggleMobileNav() {
   nav.classList.toggle('active');
 }
 
-const navBtn = document.getElementsByTagName('nav')[0].getElementsByTagName('button')[0];
-navBtn.onclick = () => { toggleMobileNav() };
+if (document.readyState == "complete") {
+  const navBtn = document.getElementsByTagName('nav')[0].getElementsByTagName('button')[0];
+  navBtn.onclick = () => { toggleMobileNav() };
+} else {
+  window.addEventListener("load", function() {
+    const navBtn = document.getElementsByTagName('nav')[0].getElementsByTagName('button')[0];
+    navBtn.onclick = () => { toggleMobileNav() };
+}, false); 
+}
