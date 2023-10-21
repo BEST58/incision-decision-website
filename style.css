@@ -130,13 +130,13 @@ nav a {
 }
 .logoText {
     padding-left: 2.6%;
-    font-size: 4rem;
+    font-size: 2rem;
     transition: 0.2s;
 }
 nav #headerLogo {
     transition: 0.2s;
-    width:50%;
-    max-width: 150px;
+    width: 150px;
+    height: 150px;
 }
 
 header *,
