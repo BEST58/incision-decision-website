@@ -32,10 +32,10 @@ function findImage(row, col) {
     map[row + 1][col] === ' '
   ) {
     if (
-      map[row - 1][col - 1] === '-' &&
-      map[row - 1][col + 1] === '-' &&
-      map[row + 1][col - 1] === '-' &&
-      map[row + 1][col + 1] === '-'
+      map[row - 1][col - 1] === '█' &&
+      map[row - 1][col + 1] === '█' &&
+      map[row + 1][col - 1] === '█' &&
+      map[row + 1][col + 1] === '█'
     ) {
       return images.pipeCross;
     } else {
@@ -44,33 +44,33 @@ function findImage(row, col) {
   }
 
   if (
-    map[row] && map[row][col - 1] === '-' &&
-    map[row][col + 1] === '-' &&
-    map[row - 1] && map[row - 1][col] === '-' &&
-    map[row + 1] && map[row + 1][col] === '-'
+    map[row] && map[row][col - 1] === '█' &&
+    map[row][col + 1] === '█' &&
+    map[row - 1] && map[row - 1][col] === '█' &&
+    map[row + 1] && map[row + 1][col] === '█'
   ) {
     return images.pipeCross;
   }
 
   if (
     (!map[row - 1] || map[row - 1][col] === ' ') &&
-    (map[row + 1] && map[row + 1][col] === '-')
+    (map[row + 1] && map[row + 1][col] === '█')
   ) {
     if (
-      map[row][col - 1] === '-' &&
-      map[row][col + 1] !== '-') {
+      map[row][col - 1] === '█' &&
+      map[row][col + 1] !== '█') {
       return images.pipeCornerTopRight;
     } else if (
-    map[row][col - 1] !== '-' &&
-    map[row][col + 1] === '-') {
+    map[row][col - 1] !== '█' &&
+    map[row][col + 1] === '█') {
       return images.pipeCornerTopLeft;
     } else if (
-      map[row][col - 1] !== '-' &&
-      map[row][col + 1] !== '-') {
+      map[row][col - 1] !== '█' &&
+      map[row][col + 1] !== '█') {
       return images.capTop;
     } else if (
-      map[row][col - 1] === '-' &&
-      map[row][col + 1] === '-') {
+      map[row][col - 1] === '█' &&
+      map[row][col + 1] === '█') {
       return images.pipeConnectorTop;
     }
 
@@ -78,24 +78,24 @@ function findImage(row, col) {
   }
 
   if (
-    (map[row - 1] && map[row - 1][col] === '-') &&
+    (map[row - 1] && map[row - 1][col] === '█') &&
     (!map[row + 1] || map[row + 1][col] === ' ')
   ) {
     if (
-      map[row][col - 1] === '-' &&
-      map[row][col + 1] !== '-') {
+      map[row][col - 1] === '█' &&
+      map[row][col + 1] !== '█') {
       return images.pipeCornerBottomRight;
     } else if (
-      map[row][col - 1] !== '-' &&
-      map[row][col + 1] === '-') {
+      map[row][col - 1] !== '█' &&
+      map[row][col + 1] === '█') {
       return images.pipeCornerBottomLeft;
     } else if (
-      map[row][col - 1] !== '-' &&
-      map[row][col + 1] !== '-') {
+      map[row][col - 1] !== '█' &&
+      map[row][col + 1] !== '█') {
       return images.capBottom;
     } else if (
-      map[row][col - 1] === '-' &&
-      map[row][col + 1] === '-') {
+      map[row][col - 1] === '█' &&
+      map[row][col + 1] === '█') {
       return images.pipeConnectorBottom;
     }
 
@@ -103,17 +103,17 @@ function findImage(row, col) {
   }
 
   if (
-    map[row][col - 1] !== '-' &&
-    map[row][col + 1] !== '-' &&
-    map[row - 1] && map[row - 1][col] === '-' &&
-    map[row + 1] && map[row + 1][col] === '-'
+    map[row][col - 1] !== '█' &&
+    map[row][col + 1] !== '█' &&
+    map[row - 1] && map[row - 1][col] === '█' &&
+    map[row + 1] && map[row + 1][col] === '█'
   ) {
     return images.pipeVertical;
   }
 
   if (
-    (map[row][col - 1] !== '-') &&
-    (map[row][col + 1] === '-')
+    (map[row][col - 1] !== '█') &&
+    (map[row][col + 1] === '█')
   ) {
     if (
       (!map[row - 1] || map[row - 1][col] === ' ') &&
@@ -129,21 +129,25 @@ function findImage(row, col) {
   }
 
   if (
-    (map[row][col - 1] === '-') &&
-    (map[row][col + 1] !== '-')
+    (map[row][col - 1] === '█') &&
+    (map[row][col + 1] !== '█')
   ) {
     if (
       (!map[row - 1] || map[row - 1][col] === ' ') &&
       (!map[row + 1] || map[row + 1][col] === ' ')) {
       return images.capRight;
+    } else if (
+      (map[row - 1] && map[row - 1][col] !== ' ') &&
+      (map[row + 1] && map[row + 1][col] !== ' ')) {
+      return images.pipeConnectorLeft;
     }
 
     return images.pipeHorizontal;
   }
 
   if (
-    map[row][col - 1] === '-' &&
-    map[row][col + 1] === '-' &&
+    map[row][col - 1] === '█' &&
+    map[row][col + 1] === '█' &&
     (!map[row - 1] || map[row - 1][col] === ' ') &&
     (!map[row + 1] || map[row + 1][col] === ' ')
   ) {
