@@ -89,6 +89,7 @@ const ghosts = {
       y: startingY + Boundary.height + 3
     },
     image: getImg("images/blinky.png"),
+    smartAlgo: true,
     velocity: { x: -3, y: 0 }
   }),
   Pinky: new Ghost({
@@ -97,6 +98,25 @@ const ghosts = {
       y: startingY + Boundary.height * map.length / 2 + 3,
     },
     image: getImg("images/pinky.png"),
+    smartAlgo: true,
+    velocity: { x: -3, y: 0 }
+  }),
+  Inky: new Ghost({
+    position: {
+      x: endingX - Boundary.width * 3 + 3,
+      y: startingY + Boundary.height + 3
+    },
+    image: getImg("images/inky.png"),
+    smartAlgo: false,
+    velocity: { x: -3, y: 0 }
+  }),
+  Clyde: new Ghost({
+    position: {
+      x: endingX - Boundary.width * 3 + 3,
+      y: startingY + Boundary.height + 3
+    },
+    image: getImg("images/clyde.png"),
+    smartAlgo: false,
     velocity: { x: -3, y: 0 }
   })
 }
@@ -164,6 +184,7 @@ function willIntersectRectangle(rectangle, velocity) {
 function animate() {
   // stop
   if (doStop) {
+    ctx.fillText(`GAME OVER`, 225, 375);
     return;
   }
 
@@ -264,7 +285,7 @@ function animate() {
       ghost.prevCollisions = [];
       ghost.updatePosition(options, pacman.position);
     } else {
-      ghost.calc();
+      ghost.calc(pacman.position);
     }
 
     

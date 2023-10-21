@@ -2,18 +2,33 @@ class Ghost {
     static width = 24;
     static height = 24;
 
-    constructor({ position, image, velocity }) {
+    constructor({ position, image, velocity, smartAlgo }) {
         this.position = position;
         this.width = Ghost.width;
         this.height = Ghost.height;
         this.velocity = velocity || { x: 3, y: 0 };
         this.image = image;
+        this.smartAlgo = smartAlgo || false;
         this.prevCollisions = [];
     }
-    calc() {
+
+    calc(pacmanPosition) {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
+
+        if (doesCircleIntersectRectangle({ circle: { position: pacmanPosition, velocity: { x: 0, y: 0 }, radius: Pacman.radius },  rectangle: this})) {
+            doStop = true;
+            console.log("killed");
+        }
+        if (this.velocity.x < 0)
+            if (Math.abs(this.position.x - startingX) < 10)
+                this.position.x = endingX;
+
+        if (this.velocity.x > 0)
+            if (Math.abs(this.position.x - endingX) < 10)
+                this.position.x = startingX;
     }
+    
 
     updatePosition(options, pacmanPosition) {
         const dx = pacmanPosition.x - this.position.x;
@@ -24,16 +39,18 @@ class Ghost {
         const dirX = dx / distance;
         const dirY = dy / distance;
         
-        if (Math.abs(dirX) > Math.abs(dirY) && dirX < 0 && options.includes('left')){
+        if (this.smartAlgo && Math.abs(dirX) > Math.abs(dirY) && dirX < 0 && options.includes('left')){
             this.velocity = { x: -3, y: 0 };
-        }else if (Math.abs(dirX) > Math.abs(dirY) && dirX > 0 && options.includes('right')){
+        }
+        else if (this.smartAlgo && Math.abs(dirX) > Math.abs(dirY) && dirX > 0 && options.includes('right')){
             this.velocity = { x: 3, y: 0 };
         }
-        else if (Math.abs(dirX) < Math.abs(dirY) && dirY < 0 && options.includes('up')){
+        else if (this.smartAlgo && Math.abs(dirX) < Math.abs(dirY) && dirY < 0 && options.includes('up')){
             this.velocity = { x: 0, y: -3 };
-        }else if (Math.abs(dirX) < Math.abs(dirY) && dirY > 0 && options.includes('down')){
+        }else if (this.smartAlgo && Math.abs(dirX) < Math.abs(dirY) && dirY > 0 && options.includes('down')){
             this.velocity = { x: 0, y: 3 };
-        } else {
+        }
+        else {
             const velocities = {
                 left: { x: -3, y: 0 },
                 right: { x: 3, y: 0 },
@@ -45,41 +62,13 @@ class Ghost {
             this.velocity = velocities[randomOption];
         }
 
-        console.log('hi')
-
-        this.calc();
+        this.calc(pacmanPosition);
     }
-
-
-    /*calc() {
-        this.position.x += this.velocity.x;
-        this.position.y += this.velocity.y;
-    }*/
-
-    /*calc(pacman.position, pacman.position) {
-        const pacmanX = position.x;
-        const pacmanY = position.y;
-
-        const dx = pacmanX - this.position.x;
-        const dy = pacmanY - this.position.y;
-
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        const dirX = dx / distance;
-        const dirY = dy / distance;
-
-        this.velocity.x = dirX * 5; 
-        this.velocity.y = dirY * 5;
-        
-        this.position.x += this.velocity.x;
-        this.position.y += this.velocity.y;
-
-        this.calc();
-    }*/
 
     draw() {
         ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
     }
+
 }
 
 
