@@ -35,74 +35,136 @@ var group = new THREE.Group();
 var model;
 
 const setupAnimation = () => {
-    model.rotation.set(-2, -2, 1);
+    model.rotation.set(0, 0, 0);
     model.position.set(4, -3, -1);
     desktopAnimation();
 }
 
 const desktopAnimation = () => {
-    const tl = gsap.timeline({
+
+    gsap.to(model.rotation, {
+        x: 0,
+        z: 0,
+        y: 0,
+        ease: "power2.inOut",
+        duration: 1,
         scrollTrigger: {
-            trigger: ".wrap",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1
+            trigger: ".section:nth-child(0)",
+            start: "top bottom",
+            end: ".section:nth-child(1)",
+            scrub: 0.1,
         }
     });
 
-    tl.to(model.rotation, {
-        x: 3.14,
+    gsap.to(model.rotation, {
+        x: -1,
         z: 0,
         y: 0,
-        ease: "none",
+        ease: "power2.inOut",
         duration: 1,
         scrollTrigger: {
             trigger: ".section:nth-child(1)",
-            start: "top bottom",
-            end: "bottom center",
-            scrub: 1,
+            start: ".section:nth-child(1)",
+            end: ".section:nth-child(2)",
+            scrub: 0.1,
         }
     });
 
-    tl.to(model.rotation, {
+    gsap.to(model.rotation, {
         x: 0,
-        y: 0,
         z: 0,
+        y: 0,
         ease: "power2.inOut",
         duration: 1,
         scrollTrigger: {
             trigger: ".section:nth-child(2)",
-            start: "top center",
-            end: "bottom center",
-            scrub: 1
+            start: ".section:nth-child(2)",
+            end: ".section:nth-child(3)",
+            scrub: 0.1,
         }
     });
 
-    tl.to(model.scale, {
-        x: 1.25,
-        y: 1.25,
-        z: 1.25,
-        ease: "power2.in",
+    gsap.to(model.scale, {
+        x: 2,
+        z: 2,
+        y: 2,
+        ease: "power2.inOut",
         duration: 1,
         scrollTrigger: {
             trigger: ".section:nth-child(3)",
-            start: "top center",
-            end: "bottom center",
-            endTrigger: ".section:nth-child(4)",
-            scrub: 1
+            start: ".section:nth-child(3)",
+            end: ".section:nth-child(4)",
+            scrub: 0.1,
         }
     });
-    
-    tl.to(model.scale, {
+
+    gsap.to(model.position, {
+        x: 4,
+        z: -1,
+        y: -5,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(3)",
+            start: ".section:nth-child(3)",
+            end: ".section:nth-child(4)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.scale, {
         x: 1,
-        y: 1,
         z: 1,
+        y: 1,
+        ease: "power2.inOut",
         duration: 1,
         scrollTrigger: {
             trigger: ".section:nth-child(4)",
-            start: "top top",
-            endTrigger: ".section:nth-child(5)",
-            scrub: 1
+            start: ".section:nth-child(4)",
+            end: ".section:nth-child(5)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.position, {
+        x: 4,
+        z: -1,
+        y: -3,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(4)",
+            start: ".section:nth-child(4)",
+            end: ".section:nth-child(5)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.rotation, {
+        x: 0,
+        z: 0,
+        y: 1.5,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(4)",
+            start: ".section:nth-child(4)",
+            end: ".section:nth-child(5)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.rotation, {
+        x: 0,
+        z: 0,
+        y: -2,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(5)",
+            start: ".section:nth-child(5)",
+            end: "bottom bottom",
+            scrub: 0.1,
         }
     });
 }
