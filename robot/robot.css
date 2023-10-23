@@ -1,6 +1,9 @@
 body {
     overflow-x: hidden;
+    
 }
+
+
 
 .section{
     min-height: 100vh;
@@ -9,28 +12,31 @@ body {
     color: black;
     padding: 100px;
     box-sizing: border-box;
+    z-index: -99;
 }
 
 .section h1{
     width: 50%;
     display: block;
-    font-size: 8vw;
+    font-size: 6vw;
     line-height: 1.7;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
     text-align: left;
 }
 
 .section p{
     width: 50%;
+    font-size: 1vw;
+    text-align: left;
 }
 
 .section h3{
     width: 50%;
     display: block;
-    font-size: 4vw;
+    font-size: 3vw;
     line-height: 1.7;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
     text-align: left;
 }
@@ -41,5 +47,5 @@ body {
     left: 0;
     top: 0;
     position: fixed;
-    z-index: -1;
+    z-index: 99999;
 }
