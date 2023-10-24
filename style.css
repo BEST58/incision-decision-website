@@ -97,6 +97,26 @@ nav>ul {
     nav a {
         width: 100% !important;
     }
+
+    .sponsor {
+        flex-direction: column !important;
+    }
+
+    header {
+        flex-direction: column !important;
+    }
+
+    .sponsor div {
+        width: 100%;
+    }
+
+    .sponsor div:has(img) {
+        order: 1;
+    }
+
+    .sponsor div:not(:has(img)) {
+        order: 2;
+    }
 }
 
 @media screen and (min-width: 1000px) {
@@ -154,14 +174,11 @@ header {
     position: relative;
     width: 100%;
     overflow: hidden;
+    font-weight: 400;
 }
 
 header>div {
     flex: 2;
-}
-
-header {
-    font-weight: 400;
 }
 
 header p {
