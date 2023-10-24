@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../waves.css">
 
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
     <script src="../common.js" defer async></script>
 
     <title>Team #0058</title>
@@ -48,8 +50,19 @@
     <main style="position: relative;">
 
         <div style="margin: 50px auto; width: 760px;">
-            <iframe src="minigame.html" title="minigame" width="760px" height="670px" scrolling="none"></iframe>
+            <iframe id="minigameIframe" src="minigame.html" title="minigame" width="760px" height="670px" scrolling="none"></iframe>
         </div>
+
+        <script>
+            const iframe = document.getElementById("minigameIframe");
+            function setIframeFocus() {
+                window.setTimeout(function() {
+                    iframe.contentWindow.focus();
+                }, 100)
+            }
+
+            iframe.onload = setIframeFocus;
+        </script>
 
     </main>
     <footer>
