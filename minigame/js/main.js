@@ -5,6 +5,7 @@ pressStart2PFont.load().then(function (font) {
 
   ctx.font = "40px pressStart2P";
 
+  ctx.fillStyle = "black";
   ctx.fillRect(0, 0, c.width, c.height);
 
   ctx.fillStyle = "white";
@@ -221,28 +222,28 @@ function animate() {
   ctx.reset();
 
   if (keysPressed.w && lastKey === 'w') {
-    if (willIntersectCircle(pacman, { x: 0, y: -3 })) {
+    if (willIntersectCircle(pacman, { x: 0, y: -4 })) {
       pacman.velocity.y = 0;
     } else {
-      pacman.velocity.y = -3;
+      pacman.velocity.y = -4;
     }
   } else if (keysPressed.s && lastKey === 's') {
-    if (willIntersectCircle(pacman, { x: 0, y: 3 })) {
+    if (willIntersectCircle(pacman, { x: 0, y: 4 })) {
       pacman.velocity.y = 0;
     } else {
-      pacman.velocity.y = 3;
+      pacman.velocity.y = 4;
     }
   } else if (keysPressed.a && lastKey === 'a') {
-    if (willIntersectCircle(pacman, { x: -3, y: 0 })) {
+    if (willIntersectCircle(pacman, { x: -4, y: 0 })) {
       pacman.velocity.x = 0;
     } else {
-      pacman.velocity.x = -3;
+      pacman.velocity.x = -4;
     }
   } else if (keysPressed.d && lastKey === 'd') {
-    if (willIntersectCircle(pacman, { x: 3, y: 0 })) {
+    if (willIntersectCircle(pacman, { x: 4, y: 0 })) {
       pacman.velocity.x = 0;
     } else {
-      pacman.velocity.x = 3;
+      pacman.velocity.x = 4;
     }
   }
 
@@ -327,8 +328,6 @@ function startAnimating(fps) {
   animate();
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
   c = document.getElementById("myCanvas");
   c.width = window.innerWidth;
@@ -336,6 +335,7 @@ document.addEventListener("DOMContentLoaded", function () {
   ctx = c.getContext("2d");
   ctx.font = "40px pressStart2P";
 
+  ctx.fillStyle = "black";
   ctx.fillRect(0, 0, c.width, c.height);
 
   ctx.fillStyle = "white";
@@ -343,6 +343,8 @@ document.addEventListener("DOMContentLoaded", function () {
   ctx.fillText(`PRESS ANY KEY`, c.width / 2, c.height / 2 - 20);
   ctx.fillText(`TO START`, c.width / 2, c.height / 2 + 20);
   ctx.textAlign = "left";
+
+  console.log("a");
 });
 
 document.addEventListener('keydown', (e) => {
