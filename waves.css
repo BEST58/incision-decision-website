@@ -17,7 +17,6 @@ header .air.air1 {
 }
 
 header .air.air2 {
-  animation: wave2 15s linear infinite;
   z-index: 999;
   opacity: 0.5;
   animation-delay: -5s;
@@ -26,7 +25,6 @@ header .air.air2 {
 }
 
 header .air.air3 {
-  animation: wave 30s linear infinite;
   z-index: 998;
   opacity: 0.2;
   animation-delay: -2s;
