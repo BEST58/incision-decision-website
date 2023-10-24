@@ -1,65 +1,202 @@
-import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+import * as THREE from 'https://cdn.skypack.dev/three@0.126.1/build/three.module.js';
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.126.1/examples/jsm/loaders/GLTFLoader.js";
+import { gsap } from 'https://cdn.skypack.dev/gsap';
+import { ScrollTrigger } from 'https://cdn.skypack.dev/gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const canvas = document.getElementById('canvas');
+
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color("white");
-const camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 5;
 
-const animationContainer = document.getElementById('animation-container');
+const renderer = new THREE.WebGLRenderer( { canvas : document.getElementById('canvas'), alpha: true } );
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.setSize(window.innerWidth, window.innerHeight);
 
-//animationContainer.classList.add('animate');
+var light1 = new THREE.DirectionalLight(0xFFFFFF, 1);
+light1.position.set(0, 1, 0);
+scene.add(light1);
 
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+var light2 = new THREE.DirectionalLight(0xFFFFFF, 0.75);
+light2.position.set(1, 1, 1);
+scene.add(light2);
 
-const geometry1 = new THREE.BoxGeometry( 1, 1, 1);
-const material1 = new THREE.MeshBasicMaterial( { color: "lightblue" } );
-const cube1 = new THREE.Mesh( geometry1, material1 );
-scene.add( cube1 );
+var light3 = new THREE.DirectionalLight(0xFFFFFF, 0.5);
+light3.position.set(0, -2, 3);
+scene.add(light3);
 
-const geometry2 = new THREE.BoxGeometry( 1, 1, 1);
-const material2 = new THREE.MeshBasicMaterial( { color: "blue" } );
-const cube2 = new THREE.Mesh( geometry2, material2 );
-scene.add( cube2 );
+var mode;
 
-const geometry3 = new THREE.BoxGeometry( 1, 1, 1);
-const material3 = new THREE.MeshBasicMaterial( { color: "lightgreen" } );
-const cube3 = new THREE.Mesh( geometry3, material3 );
-scene.add( cube3 );
+var group = new THREE.Group();
 
-camera.position.z = 10;
-//camera.position.x = 0;
+var model;
 
-cube1.rotation.y = -0.0;
-cube1.position.x = 0;
-cube1.position.y = 0;
+const setupAnimation = () => {
+    model.rotation.set(0, 0, 0);
+    model.position.set(4, -3, -1);
+    desktopAnimation();
+}
 
-cube2.rotation.y += 0;
-cube2.position.x = -1.0;
-cube2.position.y = -5;
+const desktopAnimation = () => {
+
+    gsap.to(model.rotation, {
+        x: 0,
+        z: 0,
+        y: 0,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(0)",
+            start: "top bottom",
+            end: ".section:nth-child(1)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.rotation, {
+        x: -1,
+        z: 0,
+        y: 0,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(1)",
+            start: ".section:nth-child(1)",
+            end: ".section:nth-child(2)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.rotation, {
+        x: 0,
+        z: 0,
+        y: 0,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(2)",
+            start: ".section:nth-child(2)",
+            end: ".section:nth-child(3)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.scale, {
+        x: 2,
+        z: 2,
+        y: 2,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(3)",
+            start: ".section:nth-child(3)",
+            end: ".section:nth-child(4)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.position, {
+        x: 4,
+        z: -1,
+        y: -5,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(3)",
+            start: ".section:nth-child(3)",
+            end: ".section:nth-child(4)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.scale, {
+        x: 1,
+        z: 1,
+        y: 1,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(4)",
+            start: ".section:nth-child(4)",
+            end: ".section:nth-child(5)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.position, {
+        x: 4,
+        z: -1,
+        y: -3,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(4)",
+            start: ".section:nth-child(4)",
+            end: ".section:nth-child(5)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.rotation, {
+        x: 0,
+        z: 0,
+        y: 1.5,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(4)",
+            start: ".section:nth-child(4)",
+            end: ".section:nth-child(5)",
+            scrub: 0.1,
+        }
+    });
+
+    gsap.to(model.rotation, {
+        x: 0,
+        z: 0,
+        y: -2,
+        ease: "power2.inOut",
+        duration: 1,
+        scrollTrigger: {
+            trigger: ".section:nth-child(5)",
+            start: ".section:nth-child(5)",
+            end: "bottom bottom",
+            scrub: 0.1,
+        }
+    });
+}
 
 
-cube3.rotation.y = -0.0;
-cube3.position.x = 1;
-cube3.position.y = 5;
+
+const LoadingManager = new THREE.LoadingManager(() => {
+    setupAnimation();
+})
+
+const loader = new GLTFLoader(LoadingManager)
+
+loader.load('../assets/robot.glb', function(glb){
+    mode = glb.scene;
+    mode.scale.set(0.006, 0.006, 0.006);
+    group.add(mode);
+    scene.add(group);
+    model = group;
+}, function(xhr){
+    console.log((xhr.loaded/xhr.total * 100) + "% Loaded")
+});
+
+
+
+
+animate();
 
 
 function animate() {
-	requestAnimationFrame( animate );
+    renderer.render(scene, camera);
 
-	cube1.rotation.x += 0.00;
-	cube1.rotation.y += 0.00;
+    
 
-	cube2.rotation.x += 0.00;
-	cube2.rotation.y += 0.00;
-	cube2.position.y += 0.01;
-
-	cube3.rotation.x += 0.00;
-	cube3.rotation.y += 0.00;
-	cube3.position.y -= 0.01;
-
-	renderer.render( scene, camera );
+    requestAnimationFrame(animate);
 }
-//console.log(THREE);
-
-animate();
