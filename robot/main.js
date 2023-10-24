@@ -46,17 +46,25 @@ const desktopAnimation = () => {
         // Section 0 animations
         {
             target: model.rotation,
-            values: { x: 0, z: 0, y: 0 }
+            values: { x: 0, z: 0, y: 0 },
+            target2: model.position,
+            values2: { x: 4, y: -3, z: -1 },
         },
         // Section 1 animations
         {
             target: model.rotation,
-            values: { x: -1, z: 0, y: 0 }
+            values: { x: -1, z: 0, y: 0 },
+            target2: model.position,
+            values2: { x: 4, y: 0, z: -1 },
         },
         // Section 2 animations
         {
             target: model.rotation,
-            values: { x: 0, z: 0, y: 0 }
+            values: { x: 0, z: 0, y: 0 },
+            target2: model.position,
+            values2: { x: 4, y: -3, z: -1 },
+			target3: model.scale,
+            values3: { x: 1, z: 1, y: 1 },
         },
         // Section 3 animations
         {
