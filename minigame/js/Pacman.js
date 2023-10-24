@@ -8,7 +8,7 @@ class Pacman {
         this.images = [
             [getImg("images/pacmanRight.png"), getImg("images/pacmanRightOpen.png")],
             [getImg("images/pacmanLeft.png"), getImg("images/pacmanLeftOpen.png")],
-            [getImg("images/pacmanDown.png"), getImg("images/pacmanDownOpen.png")]
+            [getImg("images/pacmanDown.png"), getImg("images/pacmanDownOpen.png")],
             [getImg("images/pacmanUp.png"), getImg("images/pacmanUpOpen.png")],
         ]
         this.turn = this.images[0];
