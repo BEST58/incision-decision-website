@@ -15,6 +15,7 @@ camera.position.z = 5;
 const renderer = new THREE.WebGLRenderer( { canvas : document.getElementById('canvas'), alpha: true } );
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio( window.devicePixelRatio );
 
 var light1 = new THREE.DirectionalLight(0xFFFFFF, 1);
 light1.position.set(0, 1, 0);
@@ -41,135 +42,87 @@ const setupAnimation = () => {
 }
 
 const desktopAnimation = () => {
+    const sectionAnimations = [
+        // Section 0 animations
+        {
+            target: model.rotation,
+            values: { x: 0, z: 0, y: 0 }
+        },
+        // Section 1 animations
+        {
+            target: model.rotation,
+            values: { x: -1, z: 0, y: 0 }
+        },
+        // Section 2 animations
+        {
+            target: model.rotation,
+            values: { x: 0, z: 0, y: 0 }
+        },
+        // Section 3 animations
+        {
+            target: model.scale,
+            values: { x: 2, z: 2, y: 2 },
+            target2: model.position,
+            values2: { x: 4, z: -1, y: -5 }
+        },
+        // Section 4 animations
+        {
+            target: model.scale,
+            values: { x: 1, z: 1, y: 1 },
+            target2: model.position,
+            values2: { x: 4, z: -1, y: -3 },
+            target3: model.rotation,
+            values3: { x: 0, z: 0, y: 1.5 }
+        },
+        // Section 5 animations
+        {
+            target: model.rotation,
+            values: { x: 0, z: 0, y: -2 }
+        }
+    ];
 
-    gsap.to(model.rotation, {
-        x: 0,
-        z: 0,
-        y: 0,
-        ease: "power2.inOut",
-        duration: 1,
-        scrollTrigger: {
-            trigger: ".section:nth-child(0)",
-            start: "top bottom",
-            end: ".section:nth-child(1)",
-            scrub: 0.1,
+    sectionAnimations.forEach((animation, sectionIndex) => {
+        gsap.to(animation.target, {
+            ...animation.values,
+            duration: 1,
+            ease: "power2.inOut",
+            scrollTrigger: {
+                trigger: `.section:nth-child(${sectionIndex + 1})`,
+                start: "top center",
+                end: `.section:nth-child(${sectionIndex + 2})`,
+                scrub: 0.1,
+            }
+        });
+
+        if (animation.target2) {
+            gsap.to(animation.target2, {
+                ...animation.values2,
+                duration: 1,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: `.section:nth-child(${sectionIndex + 1})`,
+                    start: "top center",
+                    end: `.section:nth-child(${sectionIndex + 2})`,
+                    scrub: 0.1,
+                }
+            });
+        }
+
+        if (animation.target3) {
+            gsap.to(animation.target3, {
+                ...animation.values3,
+                duration: 1,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: `.section:nth-child(${sectionIndex + 1})`,
+                    start: "top center",
+                    end: `.section:nth-child(${sectionIndex + 2})`,
+                    scrub: 0.1,
+                }
+            });
         }
     });
-
-    gsap.to(model.rotation, {
-        x: -1,
-        z: 0,
-        y: 0,
-        ease: "power2.inOut",
-        duration: 1,
-        scrollTrigger: {
-            trigger: ".section:nth-child(1)",
-            start: ".section:nth-child(1)",
-            end: ".section:nth-child(2)",
-            scrub: 0.1,
-        }
-    });
-
-    gsap.to(model.rotation, {
-        x: 0,
-        z: 0,
-        y: 0,
-        ease: "power2.inOut",
-        duration: 1,
-        scrollTrigger: {
-            trigger: ".section:nth-child(2)",
-            start: ".section:nth-child(2)",
-            end: ".section:nth-child(3)",
-            scrub: 0.1,
-        }
-    });
-
-    gsap.to(model.scale, {
-        x: 2,
-        z: 2,
-        y: 2,
-        ease: "power2.inOut",
-        duration: 1,
-        scrollTrigger: {
-            trigger: ".section:nth-child(3)",
-            start: ".section:nth-child(3)",
-            end: ".section:nth-child(4)",
-            scrub: 0.1,
-        }
-    });
-
-    gsap.to(model.position, {
-        x: 4,
-        z: -1,
-        y: -5,
-        ease: "power2.inOut",
-        duration: 1,
-        scrollTrigger: {
-            trigger: ".section:nth-child(3)",
-            start: ".section:nth-child(3)",
-            end: ".section:nth-child(4)",
-            scrub: 0.1,
-        }
-    });
-
-    gsap.to(model.scale, {
-        x: 1,
-        z: 1,
-        y: 1,
-        ease: "power2.inOut",
-        duration: 1,
-        scrollTrigger: {
-            trigger: ".section:nth-child(4)",
-            start: ".section:nth-child(4)",
-            end: ".section:nth-child(5)",
-            scrub: 0.1,
-        }
-    });
-
-    gsap.to(model.position, {
-        x: 4,
-        z: -1,
-        y: -3,
-        ease: "power2.inOut",
-        duration: 1,
-        scrollTrigger: {
-            trigger: ".section:nth-child(4)",
-            start: ".section:nth-child(4)",
-            end: ".section:nth-child(5)",
-            scrub: 0.1,
-        }
-    });
-
-    gsap.to(model.rotation, {
-        x: 0,
-        z: 0,
-        y: 1.5,
-        ease: "power2.inOut",
-        duration: 1,
-        scrollTrigger: {
-            trigger: ".section:nth-child(4)",
-            start: ".section:nth-child(4)",
-            end: ".section:nth-child(5)",
-            scrub: 0.1,
-        }
-    });
-
-    gsap.to(model.rotation, {
-        x: 0,
-        z: 0,
-        y: -2,
-        ease: "power2.inOut",
-        duration: 1,
-        scrollTrigger: {
-            trigger: ".section:nth-child(5)",
-            start: ".section:nth-child(5)",
-            end: "bottom bottom",
-            scrub: 0.1,
-        }
-    });
-}
-
-
+};
 
 const LoadingManager = new THREE.LoadingManager(() => {
     setupAnimation();
@@ -195,8 +148,5 @@ animate();
 
 function animate() {
     renderer.render(scene, camera);
-
-    
-
     requestAnimationFrame(animate);
 }
