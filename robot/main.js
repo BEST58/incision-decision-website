@@ -53,9 +53,9 @@ const desktopAnimation = () => {
         // Section 1 animations
         {
             target: model.rotation,
-            values: { x: -1, z: 0, y: 0 },
+            values: { x: 0.15, z: -0.5, y: 1.25 },
             target2: model.position,
-            values2: { x: 4, y: 0, z: -1 },
+            values2: { x: 4, y: -2, z: -1 },
         },
         // Section 2 animations
         {
@@ -85,48 +85,40 @@ const desktopAnimation = () => {
         // Section 5 animations
         {
             target: model.rotation,
-            values: { x: 0, z: 0, y: -2 }
+            values: { x: 0, z: 0, y: -2 },
+            target2: model.scale,
+            values2: { x: 1.25, z: 1.25, y: 1.25 },
         }
     ];
 
     sectionAnimations.forEach((animation, sectionIndex) => {
-        gsap.to(animation.target, {
+		const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: `.section:nth-child(${sectionIndex + 1})`,
+				start: "top center",
+				end: `.section:nth-child(${sectionIndex + 2})`,
+				scrub: 0.1,
+			}
+		});
+
+        tl.to(animation.target, {
             ...animation.values,
             duration: 1,
-            ease: "power2.inOut",
-            scrollTrigger: {
-                trigger: `.section:nth-child(${sectionIndex + 1})`,
-                start: "top center",
-                end: `.section:nth-child(${sectionIndex + 2})`,
-                scrub: 0.1,
-            }
         });
 
         if (animation.target2) {
-            gsap.to(animation.target2, {
+            tl.to(animation.target2, {
                 ...animation.values2,
                 duration: 1,
-                ease: "power2.inOut",
-                scrollTrigger: {
-                    trigger: `.section:nth-child(${sectionIndex + 1})`,
-                    start: "top center",
-                    end: `.section:nth-child(${sectionIndex + 2})`,
-                    scrub: 0.1,
-                }
+				delay: -1,
             });
         }
 
         if (animation.target3) {
-            gsap.to(animation.target3, {
+            tl.to(animation.target3, {
                 ...animation.values3,
                 duration: 1,
-                ease: "power2.inOut",
-                scrollTrigger: {
-                    trigger: `.section:nth-child(${sectionIndex + 1})`,
-                    start: "top center",
-                    end: `.section:nth-child(${sectionIndex + 2})`,
-                    scrub: 0.1,
-                }
+				delay: -1,
             });
         }
     });
