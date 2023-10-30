@@ -8,7 +8,6 @@ body {
 .section{
     min-height: 100vh;
     width: 100vw;
-    border: 1px solid #7db8e7;
     color: black;
     padding: 100px;
     box-sizing: border-box;
