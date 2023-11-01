@@ -134,7 +134,27 @@ nav a {
     font-size: 1.75rem;
     text-decoration: none;
     width: fit-content;
+    position: relative;
 }
+
+nav a:after {    
+    background: none repeat scroll 0 0 transparent;
+    bottom: -0.35rem;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: var(--text-color);
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+nav a:hover:after { 
+    width: 100%; 
+    left: 0; 
+}  
+
 .navList{
     flex: 1;
     padding: 0;
