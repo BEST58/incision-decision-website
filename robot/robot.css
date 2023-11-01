@@ -1,11 +1,9 @@
 body {
     overflow-x: hidden;
-    
+
 }
 
-
-
-.section{
+.section {
     min-height: 100vh;
     width: 100vw;
     color: black;
@@ -21,7 +19,7 @@ body {
     justify-content: center;
 }
 
-.section h1{
+.section h1 {
     width: 50%;
     display: block;
     font-size: 4rem;
@@ -31,13 +29,13 @@ body {
     text-align: left;
 }
 
-.section p{
+.section p {
     width: 50%;
     font-size: 1.25rem;
     text-align: left;
 }
 
-.section h3{
+.section h3 {
     width: 50%;
     display: block;
     font-size: 2.75rem;
@@ -47,11 +45,33 @@ body {
     text-align: left;
 }
 
-.canvas-container{
+.canvas-container {
     width: 100vw;
     height: 100vh;
     left: 0;
     top: 0;
     position: fixed;
     z-index: -99999;
+}
+
+.spacer {
+    height: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+    .spacer {
+        height: 50vh;
+    }
+
+    .section {
+        min-height: max-content;
+    }
+
+    .section h3 {
+        width: 100%;
+    }
+
+    .section p {
+        width: 100%;
+    }
 }
