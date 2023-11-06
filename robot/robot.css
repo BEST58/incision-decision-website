@@ -54,17 +54,25 @@ body {
     z-index: -99999;
 }
 
-.spacer {
-    height: 0;
+@media (min-width: 1000px) {
+    .spacer{
+        height: 0%;
+        width: 0%;
+        display: none;
+    }
 }
 
-@media only screen and (max-width: 1000px) {
+@media (max-width: 999px) {
     .spacer {
         height: 50vh;
     }
 
     .section {
         min-height: max-content;
+        padding-left: 10%;
+        padding-top: 0%;
+        padding-bottom: 0%;
+        padding-right: 10%;
     }
 
     .section h3 {
@@ -73,5 +81,6 @@ body {
 
     .section p {
         width: 100%;
+        font-size: 0.75rem;
     }
 }

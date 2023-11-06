@@ -2,7 +2,6 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.126.1/build/three.module
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.126.1/examples/jsm/loaders/GLTFLoader.js";
 import { gsap } from 'https://cdn.skypack.dev/gsap';
 import { ScrollTrigger } from 'https://cdn.skypack.dev/gsap/ScrollTrigger';
-
 gsap.registerPlugin(ScrollTrigger);
 
 const canvas = document.getElementById('canvas');
@@ -12,7 +11,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.z = 5;
 
-const renderer = new THREE.WebGLRenderer( { canvas : document.getElementById('canvas'), alpha: true } );
+const renderer = new THREE.WebGLRenderer( { canvas : document.getElementById('canvas'), alpha: true, antialias:true } );
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -35,10 +34,23 @@ var group = new THREE.Group();
 
 var model;
 
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+}
+
 const setupAnimation = () => {
     model.rotation.set(0, 0, 0);
     model.position.set(4, -3, -1);
-    desktopAnimation();
+    ScrollTrigger.matchMedia({"(max-width: 799px)": mobileAnimation});
+    ScrollTrigger.matchMedia({"(min-width: 800px)": desktopAnimation});
 }
 
 const desktopAnimation = () => {
@@ -123,6 +135,149 @@ const desktopAnimation = () => {
         }
     });
 };
+
+const mobileAnimation = () => {
+    model.scale.set(0.5, 0.5, 0.5);
+
+    // Define animations for the spacers
+    const spacerAnimations = [
+        // Spacer 0 animations (initial position on the screen)
+        {
+            target: model.position,
+            values: { x: 0, y: -4, z: -1 },
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: 0 },
+            scrub: 0.5, // Adjust the scrub speed
+        },
+        // Spacer 1 animations (move the model out of the screen)
+        {
+            target: model.position,
+            values: { x: 4, y: -4, z: -1 }, // Move the model out of view
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
+            scrub: 0.5, // Adjust the scrub speed
+        },
+        // Spacer 2 animations (model stays outside the screen)
+        {
+            target: model.position,
+            values: { x: 4, y: -4, z: -1 },
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: Math.PI }, // Model continues to stay rotated
+            scrub: 0.5, // Adjust the scrub speed
+        },
+        // Spacer 3 animations (move the model back into the screen under the text)
+        {
+            target: model.position,
+            values: { x: 0, y: -4, z: -1 },
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: 0 }, // Rotates the model back to the original orientation
+            scrub: 0.5, // Adjust the scrub speed
+        },
+        // Spacer 4 animations (model stays on the screen)
+        {
+            target: model.position,
+            values: { x: 0, y: -4, z: -1 },
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: 0 }, // Model continues to stay in the original orientation
+            scrub: 0.5, // Adjust the scrub speed
+        },
+    ];
+
+    spacerAnimations.forEach((animation, spacerIndex) => {
+        const triggerElement = document.querySelector(`.spacer:nth-child(${spacerIndex + 1})`);
+
+        if (triggerElement) {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: triggerElement, // Trigger on spacers
+                    start: "top center",
+                    end: `.spacer:nth-child(${spacerIndex + 2})`, // End animation when reaching the next spacer
+                    scrub: animation.scrub,
+                },
+            });
+
+            tl.to(animation.target, {
+                ...animation.values,
+                duration: 1,
+            });
+
+            if (animation.target2) {
+                tl.to(animation.target2, {
+                    ...animation.values2,
+                    duration: 1,
+                });
+            }
+        }
+    });
+
+    // Define animations for the sections (hide the model within sections)
+    const sectionAnimations = [
+        // Section 0 animations (move the model out of the section)
+        {
+            target: model.position,
+            values: { x: 4, y: -4, z: -1 }, // Move the model out of view
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
+        },
+        // Section 1 animations (move the model out of the section)
+        {
+            target: model.position,
+            values: { x: 4, y: -4, z: -1 }, // Move the model out of view
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
+        },
+        // Section 2 animations (move the model out of the section)
+        {
+            target: model.position,
+            values: { x: 4, y: -4, z: -1 }, // Move the model out of view
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
+        },
+        // Section 3 animations (move the model out of the section)
+        {
+            target: model.position,
+            values: { x: 4, y: -4, z: -1 }, // Move the model out of view
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
+        },
+        // Section 4 animations (move the model out of the section)
+        {
+            target: model.position,
+            values: { x: 4, y: -4, z: -1 }, // Move the model out of view
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
+        },
+    ];
+
+    sectionAnimations.forEach((animation, sectionIndex) => {
+        const triggerElement = document.querySelector(`.section:nth-child(${sectionIndex + 1})`);
+
+        if (triggerElement) {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: triggerElement, // Trigger on sections
+                    start: "top center",
+                    end: `.section:nth-child(${sectionIndex + 2})`, // End animation when reaching the next section
+                    scrub: 0.1,
+                },
+            });
+
+            tl.to(animation.target, {
+                ...animation.values,
+                duration: 1,
+            });
+
+            if (animation.target2) {
+                tl.to(animation.target2, {
+                    ...animation.values2,
+                    duration: 1,
+                });
+            }
+        }
+    });
+};
+
+
 
 const LoadingManager = new THREE.LoadingManager(() => {
     setupAnimation();
