@@ -106,9 +106,9 @@ const desktopAnimation = () => {
     sectionAnimations.forEach((animation, sectionIndex) => {
 		const tl = gsap.timeline({
 			scrollTrigger: {
-				trigger: `.section:nth-child(${sectionIndex + 1})`,
+				trigger: `.section:nth-child(${(sectionIndex*2) + 1})`,
 				start: "top center",
-				end: `.section:nth-child(${sectionIndex + 2})`,
+				end: `.section:nth-child(${((sectionIndex + 1)*2) + 1})`,
 				scrub: 0.1,
 			}
 		});
@@ -140,11 +140,11 @@ const mobileAnimation = () => {
     model.scale.set(0.5, 0.5, 0.5);
 
     // Define animations for the spacers
-    const spacerAnimations = [
+    const Animations = [
         // Spacer 0 animations (initial position on the screen)
         {
             target: model.position,
-            values: { x: 0, y: -4, z: -1 },
+            values: { x: 0, y: -2, z: -1 },
             target2: model.rotation,
             values2: { x: 0, y: 0, z: 0 },
             scrub: 0.5, // Adjust the scrub speed
@@ -152,7 +152,7 @@ const mobileAnimation = () => {
         // Spacer 1 animations (move the model out of the screen)
         {
             target: model.position,
-            values: { x: 4, y: -4, z: -1 }, // Move the model out of view
+            values: { x: 0, y: -2, z: -1 }, // Move the model out of view
             target2: model.rotation,
             values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
             scrub: 0.5, // Adjust the scrub speed
@@ -160,7 +160,7 @@ const mobileAnimation = () => {
         // Spacer 2 animations (model stays outside the screen)
         {
             target: model.position,
-            values: { x: 4, y: -4, z: -1 },
+            values: { x: 0, y: -2, z: -1 },
             target2: model.rotation,
             values2: { x: 0, y: 0, z: Math.PI }, // Model continues to stay rotated
             scrub: 0.5, // Adjust the scrub speed
@@ -168,7 +168,7 @@ const mobileAnimation = () => {
         // Spacer 3 animations (move the model back into the screen under the text)
         {
             target: model.position,
-            values: { x: 0, y: -4, z: -1 },
+            values: { x: 0, y: -2, z: -1 },
             target2: model.rotation,
             values2: { x: 0, y: 0, z: 0 }, // Rotates the model back to the original orientation
             scrub: 0.5, // Adjust the scrub speed
@@ -176,7 +176,25 @@ const mobileAnimation = () => {
         // Spacer 4 animations (model stays on the screen)
         {
             target: model.position,
-            values: { x: 0, y: -4, z: -1 },
+            values: { x: 0, y: -2, z: -1 },
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: 0 }, // Model continues to stay in the original orientation
+            scrub: 0.5, // Adjust the scrub speed
+        },
+
+        // Spacer 5 animations (model stays on the screen)
+        {
+            target: model.position,
+            values: { x: 0, y: -2, z: -1 },
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: 0 }, // Model continues to stay in the original orientation
+            scrub: 0.5, // Adjust the scrub speed
+        },
+
+        // Spacer 5 animations (model stays on the screen)
+        {
+            target: model.position,
+            values: { x: 0, y: -2, z: -1 },
             target2: model.rotation,
             values2: { x: 0, y: 0, z: 0 }, // Model continues to stay in the original orientation
             scrub: 0.5, // Adjust the scrub speed
@@ -247,6 +265,22 @@ const mobileAnimation = () => {
             target2: model.rotation,
             values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
         },
+
+        // Section 5 animations (move the model out of the section)
+        {
+            target: model.position,
+            values: { x: 4, y: -4, z: -1 }, // Move the model out of view
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
+        },
+
+        // Section 5 animations (move the model out of the section)
+        {
+            target: model.position,
+            values: { x: 4, y: -4, z: -1 }, // Move the model out of view
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: Math.PI }, // Rotates the model 180 degrees
+        },
     ];
 
     sectionAnimations.forEach((animation, sectionIndex) => {
@@ -275,8 +309,8 @@ const mobileAnimation = () => {
             }
         }
     });
+    setInterval(() => console.log(model.position), 500);
 };
-
 
 
 const LoadingManager = new THREE.LoadingManager(() => {
