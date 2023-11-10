@@ -190,16 +190,7 @@ const mobileAnimation = () => {
             target: model.position,
             values: { x: 0, y: 0, z: -1 },
             target2: model.rotation,
-            values2: { x: 0, y: 0, z: 0 }, // Model continues to stay in the original orientation
-            scrub: 0.5, // Adjust the scrub speed
-        },
-
-        // Spacer 5 animations (model stays on the screen)
-        {
-            target: model.position,
-            values: { x: 0, y: 0, z: -1 },
-            target2: model.rotation,
-            values2: { x: 0, y: 0, z: 0 }, // Model continues to stay in the original orientation
+            values2: { x: 1, y: Math.PI, z: 0 }, // Model continues to stay in the original orientation
             scrub: 0.5, // Adjust the scrub speed
         },
     ];
@@ -209,51 +200,35 @@ const mobileAnimation = () => {
         // Section 0 animations (move the model out of the section)
         {
             target: model.position,
-            values: { x: 4, y: 0, z: -1 }, // Move the model out of view
+            values: { x: 5, y: 0, z: -1 }, // Move the model out of view
             target2: model.rotation,
             values2: { x: 0, y: 0, z: 0 }, // Rotates the model 180 degrees
         },
         // Section 1 animations (move the model out of the section)
         {
             target: model.position,
-            values: { x: 4, y: 0, z: -1 }, // Move the model out of view
+            values: { x: 5, y: 0, z: -1 }, // Move the model out of view
             target2: model.rotation,
             values2: { x: 0, y: 0, z: 0 }, // Rotates the model 180 degrees
         },
         // Section 2 animations (move the model out of the section)
         {
             target: model.position,
-            values: { x: 4, y: 0, z: -1 }, // Move the model out of view
+            values: { x: 5, y: 0, z: -1 }, // Move the model out of view
             target2: model.rotation,
             values2: { x: 0, y: 0, z: 0 }, // Rotates the model 180 degrees
         },
         // Section 3 animations (move the model out of the section)
         {
             target: model.position,
-            values: { x: 4, y: 0, z: -1 }, // Move the model out of view
+            values: { x: 5, y: 0, z: -1 }, // Move the model out of view
             target2: model.rotation,
             values2: { x: 0, y: 0, z: 0 }, // Rotates the model 180 degrees
         },
         // Section 4 animations (move the model out of the section)
         {
             target: model.position,
-            values: { x: 4, y: 0, z: -1 }, // Move the model out of view
-            target2: model.rotation,
-            values2: { x: 0, y: 0, z: 0 }, // Rotates the model 180 degrees
-        },
-
-        // Section 5 animations (move the model out of the section)
-        {
-            target: model.position,
-            values: { x: 4, y: 0, z: -1 }, // Move the model out of view
-            target2: model.rotation,
-            values2: { x: 0, y: 0, z: 0 }, // Rotates the model 180 degrees
-        },
-
-        // Section 5 animations (move the model out of the section)
-        {
-            target: model.position,
-            values: { x: 4, y: -2, z: -1 }, // Move the model out of view
+            values: { x: 5, y: 0, z: -1 }, // Move the model out of view
             target2: model.rotation,
             values2: { x: 0, y: 0, z: 0 }, // Rotates the model 180 degrees
         },
@@ -283,6 +258,7 @@ const mobileAnimation = () => {
                     start: "top center",
                     end: `.section:nth-child(${sectionIndex + 2})`, // End animation when reaching the next section
                     scrub: 0.1,
+                    markers: true
                 },
             });
 
