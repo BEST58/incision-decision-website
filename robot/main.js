@@ -137,7 +137,7 @@ const desktopAnimation = () => {
 };
 
 const mobileAnimation = () => {
-    model.scale.set(0.5, 0.5, 0.5);
+    model.scale.set(0.6, 0.6, 0.6);
 
     model.position.set(0, -3, -1);
     model.rotation.set(0, 0, 0);
@@ -155,9 +155,9 @@ const mobileAnimation = () => {
         // Spacer 1 animations (move the model out of the screen)
         {
             target: model.position,
-            values: { x: 0, y: 0, z: -1 }, // Move the model out of view
+            values: { x: 0, y: 2, z: -1 }, // Move the model out of view
             target2: model.rotation,
-            values2: { x: 0, y: 0, z: 0 }, // Rotates the model 180 degrees
+            values2: { x: -2, y: 0, z: 0 }, // Rotates the model 180 degrees
             scrub: 0.5, // Adjust the scrub speed
         },
         // Spacer 2 animations (model stays outside the screen)
@@ -165,15 +165,15 @@ const mobileAnimation = () => {
             target: model.position,
             values: { x: 0, y: 0, z: -1 },
             target2: model.rotation,
-            values2: { x: 0, y: 0, z: 0 }, // Model continues to stay rotated
+            values2: { x: 0, y: 0.5, z: 0 }, // Model continues to stay rotated
             scrub: 0.5, // Adjust the scrub speed
         },
         // Spacer 3 animations (move the model back into the screen under the text)
         {
             target: model.position,
-            values: { x: 0, y: 0, z: -1 },
+            values: { x: 0, y: -0.5, z: 1 },
             target2: model.rotation,
-            values2: { x: 0, y: 0, z: 0 }, // Rotates the model back to the original orientation
+            values2: { x: 0, y: 1, z: 0 },
             scrub: 0.5, // Adjust the scrub speed
         },
         // Spacer 4 animations (model stays on the screen)
@@ -181,7 +181,7 @@ const mobileAnimation = () => {
             target: model.position,
             values: { x: 0, y: 0, z: -1 },
             target2: model.rotation,
-            values2: { x: 0, y: 0, z: 0 }, // Model continues to stay in the original orientation
+            values2: { x: 0, y: 1, z: 0.5 }, // Model continues to stay in the original orientation
             scrub: 0.5, // Adjust the scrub speed
         },
 
@@ -283,7 +283,6 @@ const mobileAnimation = () => {
                     start: "top center",
                     end: `.section:nth-child(${sectionIndex + 2})`, // End animation when reaching the next section
                     scrub: 0.1,
-                    markers: true
                 },
             });
 
