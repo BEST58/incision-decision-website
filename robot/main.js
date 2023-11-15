@@ -153,13 +153,13 @@ const mobileAnimation = () => {
             scrub: 0.5, // Adjust the scrub speed
         },
         // Spacer 1 animations (move the model out of the screen)
-        {
-            target: model.position,
-            values: { x: 0, y: 2, z: -1 }, // Move the model out of view
-            target2: model.rotation,
-            values2: { x: -2, y: 0, z: 0 }, // Rotates the model 180 degrees
-            scrub: 0.5, // Adjust the scrub speed
-        },
+        // {
+        //     target: model.position,
+        //     values: { x: 0, y: 2, z: -1 }, // Move the model out of view
+        //     target2: model.rotation,
+        //     values2: { x: -2, y: 0, z: 0 }, // Rotates the model 180 degrees
+        //     scrub: 0.5, // Adjust the scrub speed
+        // },
         // Spacer 2 animations (model stays outside the screen)
         {
             target: model.position,
@@ -241,15 +241,9 @@ const mobileAnimation = () => {
     }
 
     mobileAnims.forEach((animation, sectionIndex) => {
-        console.log((sectionIndex % 2 == 0 ?
-            `.spacer:nth-child(${Math.floor(sectionIndex) + 2})` :
-            `.section:nth-child(${Math.floor(sectionIndex) + 2})`));
-
         const triggerElement = (sectionIndex % 2 == 0 ?
             document.querySelector(`.spacer:nth-child(${Math.floor(sectionIndex + 2)})`) :
             document.querySelector(`.section:nth-child(${Math.floor(sectionIndex) + 2})`));
-
-        console.log(triggerElement);
 
         if (triggerElement) {
             const tl = gsap.timeline({
@@ -258,7 +252,7 @@ const mobileAnimation = () => {
                     start: "top center",
                     end: `.section:nth-child(${sectionIndex + 2})`, // End animation when reaching the next section
                     scrub: 0.1,
-                    markers: true
+                    // markers: true
                 },
             });
 
