@@ -333,3 +333,17 @@ header img {
     padding-top: 1rem;
     font-size: 1.4rem;
 }
+
+footer {
+    display: flex;
+    padding-bottom: 10rem;
+    justify-content: center;
+    align-items: bottom;
+    flex-direction: row;
+    background-color: var(--main-bg-color);
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    font-weight: 400;
+    background-color: #B4CDEDS;
+}
