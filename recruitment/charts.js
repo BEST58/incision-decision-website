@@ -8,10 +8,10 @@ new Chart(gradeChart, {
             label: 'Employees',
             data: [4, 26, 14, 12],
             backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)'
+                '#092134',
+                '#18598C',
+                '#6C91C2',
+                '#C5D4E7'
             ],
             hoverOffset: 4
         }]
@@ -43,8 +43,8 @@ new Chart(genderChart, {
             label: 'Employees',
             data: [34, 22],
             backgroundColor: [
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)'
+                '#18598C',
+                '#6C91C2'
             ],
             hoverOffset: 4
         }]
@@ -85,15 +85,14 @@ new Chart(ethnicityChart, {
             label: 'Employees',
             data: [1, 30, 5, 8, 6, 1, 7, 5],
             backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(153, 102, 255)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 0, 0)',
-                'rgb(0, 255, 0)',
-                'rgb(0, 0, 255)'
+                '#092134',
+                '#5984bb',
+                '#18598C',
+                '#647892',
+                '#6C91C2',
+                '#8facd1',
+                '#416ba0',
+                '#C5D4E7'
             ],
             hoverOffset: 4
         }]
