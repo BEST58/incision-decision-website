@@ -222,28 +222,28 @@ function animate() {
   ctx.reset();
 
   if (keysPressed.w && lastKey === 'w') {
-    if (willIntersectCircle(pacman, { x: 0, y: -4 })) {
+    if (willIntersectCircle(pacman, { x: 0, y: -3 })) {
       pacman.velocity.y = 0;
     } else {
-      pacman.velocity.y = -4;
+      pacman.velocity.y = -3;
     }
   } else if (keysPressed.s && lastKey === 's') {
-    if (willIntersectCircle(pacman, { x: 0, y: 4 })) {
+    if (willIntersectCircle(pacman, { x: 0, y: 3 })) {
       pacman.velocity.y = 0;
     } else {
-      pacman.velocity.y = 4;
+      pacman.velocity.y = 3;
     }
   } else if (keysPressed.a && lastKey === 'a') {
-    if (willIntersectCircle(pacman, { x: -4, y: 0 })) {
+    if (willIntersectCircle(pacman, { x: -3, y: 0 })) {
       pacman.velocity.x = 0;
     } else {
-      pacman.velocity.x = -4;
+      pacman.velocity.x = -3;
     }
   } else if (keysPressed.d && lastKey === 'd') {
-    if (willIntersectCircle(pacman, { x: 4, y: 0 })) {
+    if (willIntersectCircle(pacman, { x: 3, y: 0 })) {
       pacman.velocity.x = 0;
     } else {
-      pacman.velocity.x = 4;
+      pacman.velocity.x = 3;
     }
   }
 
