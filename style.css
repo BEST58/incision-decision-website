@@ -339,6 +339,7 @@ footer {
     padding-bottom: 10rem;
     justify-content: center;
     align-items: bottom;
+    text-align: center;
     flex-direction: row;
     background-color: var(--main-bg-color);
     position: relative;
