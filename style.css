@@ -375,9 +375,9 @@ footer {
     display: flex;
     padding-bottom: 1rem;
     justify-content: center;
-    align-items: bottom;
+    align-items: center;
     text-align: center;
-    flex-direction: row;
+    flex-direction: column;
     background-color: var(--main-bg-color);
     position: relative;
     width: 100%;
@@ -396,4 +396,9 @@ footer .contentCard {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+}
+
+.pt-7 {
+    padding-top: 7rem;
+    width: 100%;
 }
