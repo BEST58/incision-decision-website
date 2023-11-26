@@ -257,35 +257,6 @@
                 (window.innerWidth > 1000 ? 1000 : window.innerWidth) - 100;
             document.getElementById("animationVid").width = w;
             document.getElementById("animationVid").height = (w / 16) * 9;
-
-            // Get the modal
-            const modal = document.getElementById("imageModal");
-
-            // Get the image and insert it inside the modal - use its "alt" text as a caption
-            var imgs = document.querySelectorAll(".expandable");
-            var modalImg = imageModal.querySelector(".modal-content");
-            var captionText = document.querySelector(".caption");
-            imgs.forEach(element => {
-               element.onclick = function () {
-                    modal.style.display = "block";
-                    modalImg.src = this.src;
-                    captionText.innerHTML = this.alt;
-                    captionText.style.top = (modalImg.getBoundingClientRect().y + modalImg.height + 10) + "px";
-                    console.log((modalImg.getBoundingClientRect().y + modalImg.height + 10) + "px")
-                }
-            });
-
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
-
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function() { 
-                modal.style.display = "none";
-            }
-
-            modal.onclick = function() { 
-                modal.style.display = "none";
-            }
         </script>
     </body>
 </html>
