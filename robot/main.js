@@ -193,6 +193,15 @@ const mobileAnimation = () => {
             values2: { x: 1, y: Math.PI, z: 0 }, // Model continues to stay in the original orientation
             scrub: 0.5, // Adjust the scrub speed
         },
+        
+        // Spacer 6 animations (model stays on the screen)
+        {
+            target: model.position,
+            values: { x: 0, y: 0, z: -1 },
+            target2: model.rotation,
+            values2: { x: 0, y: 0, z: 0 }, // Model continues to stay in the original orientation
+            scrub: 0.5, // Adjust the scrub speed
+        },
     ];
 
     // Define animations for the sections (hide the model within sections)
