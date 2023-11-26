@@ -169,7 +169,7 @@ nav a:after {
     width: 0;
 }
 
-nav a:not(.navLogo):hover:after { 
+nav a:not(.navLogo):hover:after {
     width: 100%; 
     left: 0; 
 }  
