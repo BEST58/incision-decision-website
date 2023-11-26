@@ -270,12 +270,18 @@
         </div>
 
         <script>
-            const w =
-                (window.innerWidth > 1000 ? 1000 : window.innerWidth) - 100;
-            document.querySelectorAll("iframe").forEach(element => {
-                element.width = w;
-                element.height = (w / 16) * 9;
-            });
+            const resizeIFrames = () => {
+                document.querySelectorAll("iframe").forEach(element => {
+                    const w =
+                        (element.parentElement.clientWidth > 1000 ? 1000 : element.parentElement.clientWidth) - 100;
+
+                    element.width = w;
+                    element.height = (w / 16) * 9;
+                });
+            }
+
+            window.addEventListener("resize", resizeIFrames);
+            resizeIFrames();
         </script>
     </body>
 </html>
