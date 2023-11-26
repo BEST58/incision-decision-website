@@ -373,7 +373,7 @@ table tr:nth-child(even){
 
 footer {
     display: flex;
-    padding-bottom: 10rem;
+    padding-bottom: 1rem;
     justify-content: center;
     align-items: bottom;
     text-align: center;
@@ -383,5 +383,17 @@ footer {
     width: 100%;
     overflow: hidden;
     font-weight: 400;
-    background-color: #B4CDEDS;
+    background-color: #B4CDED;
+}
+
+footer .socials {
+    width: 75%;
+}
+
+footer .contentCard {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
