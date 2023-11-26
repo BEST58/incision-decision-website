@@ -18,6 +18,7 @@
 
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="waves.css" />
+        <link rel="stylesheet" href="expandableImage.css" />
 
         <link rel="icon" type="image/x-icon" href="./favicon.ico" />
 
@@ -80,7 +81,7 @@
                 </div>
             </div>
             <div class="right">
-                <img src="./images/robot_cad.png" alt="Robot CAD" />
+                <img src="./images/robot_cad.png" alt="Our Robot's CAD" class="expandable" />
             </div>
             <div class="air air1"></div>
             <div class="air air2"></div>
@@ -89,19 +90,30 @@
 
         <main class="home">
             <!--
-            Some sections will be 'sticky' so that one piece of media will go with multiple subsections
-        -->
+                Some sections will be 'sticky' so that one piece of media will go with multiple subsections
+            -->
             <section id="aboutus">
+                <img
+                    src="images/teamphoto.jpg"
+                    alt="A Photo of the Team"
+                    class="expandable"
+                    style="margin: 1rem 1rem 0 1rem !important; width: calc(100% - 2rem) !important; max-width: none !important;"
+                />
                 <h2>About Us</h2>
                 <p>
-                    We are BEST team 0058 Eagle Robotics from Allen, Texas. We
+                    We are BEST team 0058 Eagle Robotics from Allen, Texas.
+                    Our team operates out of the
+                    <a href="https://youtu.be/Nkf6my7lv0w" title="Opens in New Tab" target="_blank">
+                        AllenISD STEAM Center
+                    </a>. We
                     strive to strengthen our community through STEM and aim to
                     be the leading representative for inclusivity, diversity,
                     and equity in our area. We serve our community in a variety
                     of ways including mentoring rookie teams, hosting community
                     events, and visiting schools. These experiences give our
-                    team members opportunities to be leaders and allow them to
-                    develop the necessary skills they need for success.
+                    team members opportunities to be leaders, allow them to
+                    develop the necessary skills they need for success, and
+                    inspire others to pursue STEM careers.
                 </p>
             </section>
             <section>
@@ -120,7 +132,10 @@
                     to inspire and motivate students towards studies and careers
                     in engineering, science, and technology. Collin County (CoCo
                     BEST) is one of several hubs throughout the state and
-                    nation.
+                    nation. Our school has participated in BEST for 28 years now,
+                    and we could not be prouder to be a part of this program. It encourages
+                    so many students to pursue STEM careers and gives them the
+                    opportunity to learn and grow in a hands-on environment.
                 </p>
             </section>
             <section>
@@ -137,14 +152,75 @@
                 <p>
                     This game is has the theme of Robotic Surgery, and it
                     inspires many people in our team who are interested in
-                    becoming an engineer or a doctor. We will be particpating in
+                    becoming an engineer or a doctor. We particpated in
                     the Collin County BEST Game on October 27-28th at Denton
-                    High School. If we make it, we will be participating in the
+                    High School. We advanced, so we will be participating in the
                     Texas State BEST Competition. We are working hard everyday
-                    to improve our designs and become the BEST option.
+                    to improve our designs and become the BEST option!
+                </p>
+            </section>
+            <section>
+                <h3>Past Competitions</h3>
+                <table>
+                    <tr>
+                        <th>Year</th>
+                        <th>Game</th>
+                        <th>Award</th>
+                    </tr>
+                    <tr>
+                        <td>2023</td>
+                        <td>Incision Decision - Texas BEST</td>
+                        <td>Coming Soon!
+                            <a
+                                href="https://www.bestoftexasrobotics.org/"
+                                target="_blank"
+                                title="Opens in New Tab"
+                            >
+                            Come watch us!
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2023</td>
+                        <td>Incision Decision - CoCoBEST</td>
+                        <td>3rd Place Best, 1st Place Robot, Robust Award</td>
+                    </tr>
+                    <tr>
+                        <td>2022</td>
+                        <td>Made2Order - Texas BEST</td>
+                        <td>Advanced to State</td>
+                    </tr>
+                    <tr>
+                        <td>2022</td>
+                        <td>Made2Order - CoCoBEST</td>
+                        <td>4th Place Robot, Robot Finalist</td>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>DemoDaze - Texas BEST</td>
+                        <td>2nd Place BEST, 2nd Place Robot, TI Engineering Notebook Award, Lockheed Martin Website Design Award</td>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>DemoDaze - CoCoBEST</td>
+                        <td>Video Design Challenge</td>
+                    </tr>
+                </table>
+                <p>
+                    Our team is immensely proud of our results in the
+                    BEST Robotics competitions. The journey to get to
+                    where we are has provided us with many unique
+                    experiences and opportunities. We are excited to
+                    continue to grow and improve as a team, and we cannot
+                    express our gratitude enough to our sponsors, mentors,
+                    and parents for their support. We would not be where
+                    we are today without them. Our team has only grown
+                    stronger and more determined to succeed, and we are
+                    excited to see what the future holds for us!
                 </p>
             </section>
         </main>
+
         <footer>
             <!--
             Quick Scroll Up?
@@ -152,11 +228,46 @@
             Contact Information / School
         --></footer>
 
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+            <div class="caption"></div>
+        </div>
+
         <script>
             const w =
                 (window.innerWidth > 1000 ? 1000 : window.innerWidth) - 100;
             document.getElementById("animationVid").width = w;
             document.getElementById("animationVid").height = (w / 16) * 9;
+
+            // Get the modal
+            const modal = document.getElementById("imageModal");
+
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var imgs = document.querySelectorAll(".expandable");
+            var modalImg = imageModal.querySelector(".modal-content");
+            var captionText = document.querySelector(".caption");
+            imgs.forEach(element => {
+               element.onclick = function () {
+                    modal.style.display = "block";
+                    modalImg.src = this.src;
+                    captionText.innerHTML = this.alt;
+                    captionText.style.top = (modalImg.getBoundingClientRect().y + modalImg.height + 10) + "px";
+                    console.log((modalImg.getBoundingClientRect().y + modalImg.height + 10) + "px")
+                }
+            });
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() { 
+                modal.style.display = "none";
+            }
+
+            modal.onclick = function() { 
+                modal.style.display = "none";
+            }
         </script>
     </body>
 </html>
