@@ -9,6 +9,13 @@
             href="https://fonts.cdnfonts.com/css/twentieth-century-condensed"
             rel="stylesheet"
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+
         <link rel="stylesheet" href="../style.css" />
         <link rel="stylesheet" href="../waves.css" />
 
@@ -141,12 +148,51 @@
                     </p>
                 </div>
             </div>
+
+            <div class="sponsor demographics">
+                <div class="right" style="width: 100%;">
+                    <h1>Demographics</h1>
+
+                    <p class="mainRecruit">
+                        We employ a very diverse team of students!
+                        We are proud to have a team that is
+                        inclusive and accepting of everyone, and we are always
+                        looking for new members to join our team!
+                    </p>
+                </div>
+                <div class="charts">
+                    <canvas height="300" id="gradeChart"></canvas>
+                    <canvas height="300" id="genderChart"></canvas>
+                    <canvas height="300" id="ethnicityChart"></canvas>
+                </div>
+            </div>
         </main>
         <footer>
             <!--
-            Quick Scroll Up?
-            Social Footer
-            Contact Information / School
-        --></footer>
+                Quick Scroll Up?
+                Social Footer
+                Contact Information / School
+            -->
+
+            <div class="air air1"></div>
+            <div class="air air2"></div>
+            <div class="air air3"></div>
+
+            <div class="pt-7"></div>
+
+            <div class="socials">
+                <h1>Follow Us!</h1>
+                <div class="contentCard">
+                    <a target="_blank" title="Opens in New Tab" href="https://www.youtube.com/channel/UCNzKnj088Y2hJrIV_JYAKUw" ><img class="socialMediaIcon" style="margin-left: 0;" src="../images/YouTubeIconIncisionDecision.png" alt="youtube" width="50" height="50"></a>
+                    <a target="_blank" title="Opens in New Tab" href="https://twitter.com/BESTteam58" ><img class="socialMediaIcon" src="../images/TwitterIconIncisionDecision.png" alt="twitter" width="50" height="50"></a>
+                    <a target="_blank" title="Opens in New Tab" href="https://instagram.com/bestteam58/" ><img class="socialMediaIcon" src="../images/InstagramIconIncisionDecision.png" alt="instagram" width="50" height="50"></a>
+                    <a target="_blank" title="Opens in New Tab" href="https://github.com/BEST58/" ><img class="socialMediaIcon" src="../images/GithubIconIncisionDecision.png" alt="github" width="50" height="50"></a>
+                </div>
+                <p>Copyright ©  2023 Eagle Robotics</p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="./charts.js"></script>
     </body>
 </html>
