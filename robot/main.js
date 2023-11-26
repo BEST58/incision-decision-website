@@ -258,7 +258,6 @@ const mobileAnimation = () => {
                     start: "top center",
                     end: `.section:nth-child(${sectionIndex + 2})`, // End animation when reaching the next section
                     scrub: 0.1,
-                    markers: true
                 },
             });
 
