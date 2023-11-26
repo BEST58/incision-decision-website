@@ -150,7 +150,7 @@
                     allowfullscreen
                 ></iframe>
                 <p>
-                    This game is has the theme of Robotic Surgery, and it
+                    This game has the theme of Robotic Surgery, and it
                     inspires many people in our team who are interested in
                     becoming an engineer or a doctor. We particpated in
                     the Collin County BEST Game on October 27-28th at Denton
@@ -159,6 +159,23 @@
                     to improve our designs and become the BEST option!
                 </p>
             </section>
+            <!-- <section>
+                <h3>Simulink Design Award</h3>
+                <iframe
+                    id="animationVid"
+                    src="https://www.youtube.com/embed/dhziDpkJa_E"
+                    title="Eagle Robotics 2023 BEST Simulink Design Award Submission"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+                <p>
+                    Our robust robot shines its way in executing surgeries autonomously,
+                    ranging from saving lives by securing uncontaminated brain biopsies
+                    to clearing out plaques with precision, whether blind or not, and
+                    concealing the arterials with stents. Powered by Simulink, we
+                    ensure every patient experiences a sense of safety and satisfaction.
+                </p>
+            </section> -->
             <section>
                 <h3>Past Competitions</h3>
                 <table>
@@ -255,8 +272,10 @@
         <script>
             const w =
                 (window.innerWidth > 1000 ? 1000 : window.innerWidth) - 100;
-            document.getElementById("animationVid").width = w;
-            document.getElementById("animationVid").height = (w / 16) * 9;
+            document.querySelectorAll("iframe").forEach(element => {
+                element.width = w;
+                element.height = (w / 16) * 9;
+            });
         </script>
     </body>
 </html>
