@@ -383,3 +383,49 @@ document.addEventListener('keydown', (e) => {
       break;
   }
 });
+
+var touchstartX = 0;
+var touchstartY = 0;
+var touchendX = 0;
+var touchendY = 0;
+
+document.addEventListener('touchstart', function(event) {
+    touchstartX = event.screenX;
+    touchstartY = event.screenY;
+}, false);
+
+document.addEventListener('touchend', function(event) {
+    touchendX = event.screenX;
+    touchendY = event.screenY;
+    handleGesure();
+}, false); 
+
+function handleGesure() {
+  if (touchendX < touchstartX) {
+    keysPressed.a = true;
+    keysPressed.d = false;
+    lastKey = 'a';
+  }
+  else if (touchendX > touchstartX) {
+    keysPressed.d = true;
+    keysPressed.a = false;
+    lastKey = 'd';
+  }
+  else if (touchendY < touchstartY) {
+    keysPressed.s = true;
+    keysPressed.w = false;
+    lastKey = 's';
+  }
+  else if (touchendY > touchstartY) {
+    keysPressed.w = true;
+    keysPressed.s = false;
+    lastKey = 'w';
+  }
+
+  console.log("Handled?!")
+
+  if (!hasStarted) {
+    hasStarted = true;
+    startAnimating(60);
+  }
+}
